@@ -1,0 +1,3 @@
+[submodule "eca"]
+	path = eca
+	url = https://github.com/utwente-db/eca.git
