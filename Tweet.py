@@ -22,7 +22,6 @@ class Place:
         self.name
         self.id
 
-#this class is just a databox and multiple instances of the same user can exist
 class User:
     def __init__(self):
         self.time_zone
@@ -37,7 +36,6 @@ class User:
         self.id
         self.favourites_count
         self.screenname #unique
-
 
 class Tweet:
     def __init__(self):
@@ -55,7 +53,9 @@ class Tweet:
 
 import os.path
 
-with open(os.path.abspath('Data\\weer.json')) as json_file:
-    data = json.load(json_file)
+data = []
+with open(os.path.abspath('Data\\weer.json'), 'r') as json_file:
+    data = [json.loads(line) for line in json_file]
 
-    print(data[1]['id'])
+
+    print(data[0]['id'])
