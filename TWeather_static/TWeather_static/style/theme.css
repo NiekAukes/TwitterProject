@@ -35,18 +35,6 @@ pre {
 .debug_green { background-color: rgba(0,255,0,0.5); }
 .debug_blue  { background-color: rgba(0,0,255,0.5); }
 
-
-/* Grid */
-.column.left {
-    width: 33.33%;
-  }
-
-.column.right {
-    width: 67.67%;
-  }
-
-
-
 /* Tweets block */
 
 .tweet-list.stream-items {

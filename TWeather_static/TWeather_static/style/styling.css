@@ -1,0 +1,17 @@
+/*  columns:    33.33% 66.67%
+    rows:       50% 16.67% 33.33%*/
+
+.Title {
+    font-size: 60px;
+    color: #FFFFFF;
+    grid-column-start: 1; grid-column-end: 2;
+    grid-row: 1 / 1;
+    text-align: center;
+}
+.Title_Icon {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    background-color: transparent;
+    max-height:100%;
+    max-width:100%;
+}
