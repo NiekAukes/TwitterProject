@@ -12,26 +12,46 @@
 <script src="/lib/charts.js"></script>
 <script src="/lib/log.js"></script>
 </head>
-<body class="container_12">
+<body class="bodycontainer">
+    <style>
+        .bodycontainer {
+            max-height: auto;
+            max-width: 99%;
+            overflow-x: hidden;
+        }
+    </style>
 
 <div class="grid_container">
-    <div class="grid_item"> 
-        <img src="/TWeather_V2_icon.ico" alt="TWeather" class="Title_Icon">
-    </div>   
+    <div class="grid_item Title_wrapper">
+        <img src="/TWEATHER HEADER.png" alt="TWeather" class="Title_Icon">
+    </div>
+    <div class="grid_item dashboard_title_wrapper">
+        <h1 class="dashboard_title">Dashboard | Weer (weather)</h1>
+    </div>
+    <div class="grid_item"><h2>TWeather1</h2></div>
 
-    <div class="grid_item">
-          <h1 class="Title">TWeather</h1>
+    <!--SEARCH BAR AND TWEET AREA-->
+    <div class="grid_item tweetarea_wrapper">
+        <div class="searchbar_tweetarea_wrapper" style="width:100%;">
+            <form class="searchbar_tweetarea"><input type="text" name="searchbar" placeholder="Enter keywords.." size="150%"></form>
+        </div>
+
+        <div class="header officialtweetsheader">Official Tweets</div>
+        <div class="tweetsareaprefab officialtweetsarea">AREA1 for official tweets</div>
+        <div class="SPACER"></div>
+        <div class="header usertweetsheader">User Tweets</div>
+        <div class="tweetsareaprefab usertweetsarea">AREA 2 for user tweets</div>
     </div>
 
-    <div class="grid_item"><h2>TWeather1</h2></div>
-    <div class="grid_item">HENLO THIS IS TEST MEN</div>
-    <div class="grid_item"><h2>TWeather2</h2></div>
-    <div class="grid_item">HENLO THIS IS TEST MEN</div>
-    <div class="grid_item"><h2>TWeather3</h2></div>
-    <div class="grid_item">HENLO THIS IS TEST MEN</div>
-    <div class="grid_item">HENLO THIS IS TEST MEN</div>
     <div class="grid_item">HENLO THIS IS TEST MEN</div>
     
+    <div class="grid_item"><h2>TWeather1</h2></div>
+    <div class="grid_item">HENLO THIS IS TEST MEN</div>
+    
+    <div class="grid_item">TWeather1</div>
+    <div class="grid_item">HENLO THIS IS TEST MEN</div>
+    
+    <div class="grid_item">TWeather1</div>
 </div>
 </body>
 </html>
