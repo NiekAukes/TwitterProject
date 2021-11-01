@@ -1,7 +1,6 @@
 import datetime
-
-def gethashtagsfromcontent(content):
-    return []
+import json
+from pathlib import Path
 
 class GeoPoint:
     def __init__(self, x, y):
@@ -15,7 +14,7 @@ class entities:
         self.urls
 
 class Place:
-    def __init__(self, h, um, url):
+    def __init__(self):
         self.place_type
         self.country
         self.ccode
@@ -41,7 +40,7 @@ class User:
 
 
 class Tweet:
-    def __init__(self, author, date, id, content, author_id):
+    def __init__(self):
         self.id
         self.text
         self.creation_date
@@ -54,16 +53,9 @@ class Tweet:
         self.place
         self.user
 
+import os.path
 
+with open(os.path.abspath('Data\\weer.json')) as json_file:
+    data = json.load(json_file)
 
-
-        self.author = author #str
-        self.dateposted = date #datetime
-        self.tweetid = id #int
-        self.content = content #str
-        self.hashtags = gethashtagsfromcontent(content) #list<str>
-        self.author_id = author_id
-
-
-def gettweetfromjson(jsoncontent):
-    pass
+    print(data[1]['id'])
