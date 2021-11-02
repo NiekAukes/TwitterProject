@@ -6,7 +6,7 @@ block.fn.weather = function(config) {
 
     // create the necessary HTML in the block container
     this.$element.append('<p>a;ljdgk</p>');
-    var $base = this.$element
+    var $base = this.$element;
     /*
     // store list for later
     var $list = this.$element.find('ol');
@@ -16,11 +16,7 @@ block.fn.weather = function(config) {
     this.actions(function(e, tweet){
         //var $content = $('<p>testtesttest</p>');
 
-
-        window.alert("teststest");
-        var $item = $('<p>tstlaej;lkja</p>');
-        $base.prepend($item);
-
+        
 /*
         var $tweet = $('<div class="tweet"></div>');
         var $content = $('<div class="content"></div>');

@@ -70,8 +70,9 @@
                 </div>
             </div>
         </section>
-        <section class="graphs" id="test">
+        <section class="graphs">
             WEATHER GRAPHS
+            <div id="test"></div>
         </section>
 
     </div>
@@ -79,11 +80,13 @@
         block('#officialTweets').tweets({
             memory:500
         });
-
-        //block("#test").weather();
         events.connect('official', '#officialTweets');
-        //events.connect('weather', '#test')
     </script>
+
+<script>
+    //block("#test").weather();
+    //events.connect('weather', '#test')
+</script>
     <script>
         block('#weathergraph').rolling_chart({
             memory: 150,

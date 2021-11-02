@@ -5,9 +5,6 @@ from eca.generators import *
 import json
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
-def push_single_tweet(tweet_single):
-    pass
-
 def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
     """
     Offline tweet replay.
