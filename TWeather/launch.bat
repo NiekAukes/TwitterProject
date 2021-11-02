@@ -1,0 +1,1 @@
+python D:\Users\douwe\Documents\GitHub\TwitterProject\eca\neca.py -s D:\Users\douwe\Documents\GitHub\TwitterProject\TWeather_static\TWeather.py

@@ -1,0 +1,182 @@
+body { 
+  margin: 0;
+  height: 100vh;
+  max-height: 100%;
+  background: #022C43;
+  color:#ffffff;
+  overflow-y: hidden;
+  font-family: arial;
+  font-size: xx-large;
+}
+
+/*Color Scheme
+
+071C21
+1D3E53
+254B62
+476D7C
+77ABB7
+
+*/
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 4.5fr 1.5fr 3fr 0.75fr;
+  height: 100vh;
+  margin: 1em;
+  grid-gap: 5px;
+  max-height: 100%;
+  grid-template-areas: "header header search"
+                       "conditions official personal"
+                       "alert official personal"
+                       "alert graphs graphs"
+  ;
+}
+
+section.header {
+  /*grid-column: 1/3;
+  grid-row: 1/2;*/
+  grid-area: header;
+  background: transparent;
+}
+
+section.search {
+  /*grid-column: 3/4;
+  grid-row: 1/2;*/
+  grid-area: search;
+  background: transparent;
+}
+
+section.alert {
+  /*grid-column: 1/2;
+  grid-row: 2/3;*/
+  grid-area: alert;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #1D3E53;
+  text-align: center;
+}
+
+section.conditions {
+  /*grid-column: 1/2;
+  grid-row: 3/5;*/
+  grid-area: conditions;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #1D3E53;
+  text-align: center;
+}
+
+section.official {
+  /*grid-column: 2/3;
+  grid-row: 2/4;*/
+  grid-area: official;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #1D3E53;
+  text-align: center;
+}
+
+section.personal {
+  /*grid-column: 3/4;
+  grid-row: 2/4;*/
+  grid-area: personal;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #1D3E53;
+  text-align: center;
+}
+
+section.graphs {
+  /*grid-column: 2/4;
+  grid-row: 4/5;*/
+  grid-area: graphs;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #1D3E53;
+  text-align: left;
+}
+
+form.tweet_search>input,form.tweet_search>button{
+  color: #ffffff;
+  /*float:right;*/
+  max-width:300px;
+  display: inline-block;
+  float: right;
+}
+
+form.tweet_search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  /*float: right;*/
+  width: 240px;
+  background: #212121;
+}
+
+form.tweet_search button {
+  /*float: right;*/
+  width: 60px;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-right: none;
+  cursor: pointer;
+}
+
+form.tweet_search button:hover {
+  background: #0b7dda;
+}
+
+form.tweet_search input:hover {
+  background: #444444;
+}
+
+form.tweet_search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.splash {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  z-index: 200;
+  align-self: center;
+  line-height: 120vh;
+}
+
+.splash.display-none {
+  position:fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  z-index: -10;
+  align-self: center;
+  line-height: 120vh;
+}
+
+.image {
+  text-align: center;
+}
+
+@keyframes fadeOut{
+  to{
+    opacity: 0;
+  }
+}
+
+.fade-out{
+  opacity: 1;
+  animation: fadeOut 1s forwards 1s;
+}

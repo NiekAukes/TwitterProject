@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <title>TWeather</title>
+    <link rel="icon" href="/Assets/Tweather.ico">
+    <link rel="stylesheet" href="/style/styling.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/lib/jquery-2.1.1.min.js"></script>
+    <script src="/lib/jquery.flot.min.js"></script>
+    <script src="/lib/core.js"></script>
+    <script src="/lib/charts.js"></script>
+    <script src="/lib/log.js"></script> 
+</head>
+<body>
+    <div class="splash image fade-out">
+        <img src="/Tweather.png" alt="TWeather">
+    </div>
+    <div class="grid-container">
+        <section class="header">
+            <!--<img src="/Tweather.ico" alt="TWeather" class="Title_Icon">-->
+            <img src="/tweather_logo.png" alt="TWeather" class="Title_Icon" width="300px" height="45px">
+        </section>
+        <section class="search">
+            <form class="tweet_search" action="/.../">
+                <input type="text" placeholder="Search..." name="search2">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </section>
+        <section class="alert">
+            WEATHER ALERT
+        </section>
+        <section class="conditions">
+            WEATHER CONDITIONS
+        </section>
+        <section class="official">
+            OFFICIAL TWEETS
+        </section>
+        <section class="personal">
+            PERSONAL TWEETS
+        </section>
+        <section class="graphs">
+            WEATHER GRAPHS
+        </section>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
