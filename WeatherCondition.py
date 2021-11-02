@@ -1,48 +1,51 @@
-class WeatherCon():
-    def __init__(self, WState, Temperature, Date, Humidity, Wind, AirPressure):
-        self.WState = WState
-        self.Temperature = Temperature
-        self.Date = Date
-        self.Humidity = Humidity
-        self.Wind = Wind
-        self.AirPressure = AirPressure
+import Tweet
+import Classifier
 
-    def WeatherState(self):
-        if self.Wind > self.AirPressure and self.Wind > self.Humidity:
-            self.WState = "Windy"
-        if self.AirPressure > self.Wind and self.AirPressure > self.Humidity:
-            self.WState = "Dry"
-        if self.Humidity > self.AirPressure and self.Humidity > self.Wind:
-            self.WState = "Humid"
+Classifier.OfficialTweets
 
-    def display(self):
-        print("Weather State: " + self.WState)
-        print("Temperature: " + str(self.Temperature))
-        print("Date: " + self.Date)
-        print("Humidity: " + str(self.Humidity))
-        print("Wind: " + str(self.Wind))
-        print("AirPressure: " + str(self.AirPressure))
+def Extract(Tweet):
+    Humidity = Tweet.find("Hum")
+    Time = Tweet.find("-T")
+    Wind = Tweet.find("wind")
+    AirPressure = Tweet.find("hPa")
+    AirStatus = Tweet.find("hPa")
+    Rain = Tweet.find("rain")
+    UV = Tweet.find("Uv")
+    Temp = Tweet.find("-T")
 
-#test1 = WeatherCon("---", 23, "12/03/2003", 23, 43, 12)
-#test2 = WeatherCon("---", 50, "12/04/2020", 50, 10, 34)
-#test2.WeatherState()
-#test2.display()
+    #Time 
+    if "-T" in Tweet:
+        print("Time: " + Tweet[14:22])
+    #Humidity in percentage
+    if "Hum" in Tweet:
+        print("Humidity: " + Tweet[Humidity + 4] + Tweet[Humidity + 5] + " %")
+    #Wind in meter per second
+    if "wind" in Tweet:
+        print("Wind: " + Tweet[Wind + 5] + Tweet[Wind + 6] + Tweet[Wind + 7] + " m/s")
+    #Wind direction
+    if "wind" in Tweet:
+        print("Wind Direction: " + Tweet[Wind + 21] + Tweet[Wind + 22] + Tweet[Wind + 23])
+    #Air pressure
+    if "hPa" in Tweet:
+        print("Air Pressure: " + Tweet[69:76])
+    #Air pressure status: Rising/Falling/Steady
+    if "hPa" in Tweet:
+        print("AP Status: " + "hPa." + Tweet[81:87])
+    #Rain in milimeters
+    if "rain" in Tweet:
+        print("Rain: " + Tweet[Rain + 5] + Tweet[Rain + 6] + Tweet[Rain + 7] + "mm")
+    #UV
+    if "Uv" in Tweet:
+        print("UV: " + Tweet[UV + 3] + Tweet[UV + 4] + Tweet[UV + 5])
+    #Temperature
+    if "-T" in Tweet:
+        print("Temperature: " + Tweet[Time + 4] + Tweet[Time + 5] + Tweet[Time + 6] + " Celcius")
 
-test = "07:07:43-T. 5,3\u00baC |Hum 95%-wind 0,0 m/s.(F0bft).--- |\n1020,36 hPa.Rising |rain 2,0 mm |Uv 0,0 | #Buren #weer #weather #rain"
-Humidity = test.find("Hum")
-Time = test.find("-T")
-Wind = test.find("wind")
-if "-T" in test:
-    print("Time: " + test[0:8])
-if "Hum" in test:
-    print("Humidity: " + test[Humidity + 4] + test[Humidity + 5])
-if "wind" in test:
-    print("Wind: " + test[Wind + 5] + test[Wind + 6] + test[Wind + 7])
-print(Wind)
 
 
 
-    
-
+x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
+print(Classifier.OfficialTweets[10])
+Extract(x[10])
 
 
