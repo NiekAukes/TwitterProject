@@ -38,16 +38,22 @@
                 </form>
             </div>
         </section>
-        <section class="alert">
+        <section class="alert non-selectable bigheader" ondragstart="return false">
             WEATHER ALERT
         </section>
-        <section class="conditions">
+        <section class="conditions non-selectable bigheader" ondragstart="return false">
             WEATHER CONDITIONS
-            <div class="weathergraph">
-
+            <div class="CurrentWeather">
+                <img src="Assets/WeatherCond/animated/cloudy-day-1.svg" class="WeatherConditionImage currWeatherItem">
+                <div class="currTemp_weatherCondDescr currWeatherItem">xx°C, Cloudy</div>
+                <div class="location currWeatherItem">Enschede</div>
             </div>
+            <div class="WeatherGraph">
+                GIMME GRAPH PLS
+            </div>
+            
         </section>
-        <section class="official">
+        <section class="official non-selectable bigheader" ondragstart="return false">
             OFFICIAL WEATHER TWEETS
             <label class="switch">
                 <input type="checkbox" id="myCheckbox" onchange="toggleCheck()" checked>
@@ -58,7 +64,7 @@
                 </div>
             </div>
         </section>
-        <section class="personal">
+        <section class="personal non-selectable bigheader" ondragstart="return false">
             PERSONAL WEATHER TWEETS
             <label class="switch">
                 <input type="checkbox" id="myCheckbox1" onchange="toggleCheck()" checked>
@@ -69,7 +75,7 @@
                 </div>
             </div>
         </section>
-        <section class="graphs">
+        <section class="graphs non-selectable bigheader" ondragstart="return false">
             WEATHER GRAPHS
         </section>
 

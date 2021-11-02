@@ -64,7 +64,7 @@ pre {
 }
 
 .tweet-list .stream-item:hover {
-    background-color: #212121; /*was #EEE*/
+    background-color: #212121c2; /*was #EEE*/
 }
 
 .tweet-list li.stream-item {

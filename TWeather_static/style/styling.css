@@ -30,6 +30,14 @@ body {
 77ABB7
 
 */
+.bigheader {
+  font-size:20px;
+}
+.non-selectable {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
 
 .grid-container {
   display: grid;
@@ -84,6 +92,48 @@ section.conditions {
   background: #243447;
   text-align: center;
 }
+.CurrentWeather{
+  width:100%;
+  min-height:25%;
+  max-height:25%;
+  background-color: transparent;
+}
+.currWeatherItem{
+  background-color: transparent;
+  font-size:larger;
+  font-weight:normal;
+}
+.WeatherConditionImage{
+  /*width:25%;*/
+  float:left;
+  width:25%;
+  margin-top:-7.5%; margin-right:-2.5%;
+}
+.currTemp_weatherCondDescr{
+  /*width:35%;
+  align-self:flex-start;*/
+  text-align: left;
+  float:left;
+  padding-top:3%;
+}
+.location{
+  /*width:40%;
+  align-self: flex-end;*/
+  text-align: right;
+  float:left;
+  vertical-align: bottom;
+  padding-top: 4%; margin-left:10px;
+  font-size:smaller;
+  font-weight:600;
+  color:#bebebe;
+}
+.currWeatherWeatherGraph{
+  height: 65%;
+  border:#FFFFFF 4px solid;
+  text-align: left;
+}
+
+
 
 section.official {
   /*grid-column: 2/3;
