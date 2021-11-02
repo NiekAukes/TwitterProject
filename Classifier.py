@@ -6,10 +6,13 @@
 from Tweet import *
 OfficialAccounts = ["wska_nl"]
 
+OfficialTweets = []
+RegularTweets = []
 
 def SeperateTweets(tweetlist):
     officiallist = []
     regularlist = []
+    
     for tweet in tweetlist:
         if tweet['user']['screen_name'] in OfficialAccounts:
             officiallist.append(tweet)
@@ -18,5 +21,12 @@ def SeperateTweets(tweetlist):
     
     return (officiallist,regularlist)
 
+OfficialTweets = SeperateTweets(data)
+RegularTweets = OfficialTweets[1]
+OfficialTweets = OfficialTweets[0]
+
+
 if __name__ == "__main__":
     print(SeperateTweets(data)[0][0]['user']['screen_name'])
+
+
