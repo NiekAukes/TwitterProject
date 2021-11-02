@@ -3,10 +3,11 @@ from eca import *
 from eca.generators import start_offline_tweets
 import datetime
 import textwrap
+from WeatherEventGen import *
 
 @event('init')
 def setup(ctx, e):
-   start_offline_tweets('data/weer.json', time_factor=10000, event_name='chirp')
+   start_tweets('data/weer.json', time_factor=10000, event_name='chirp')
 
 @event('chirp')
 def tweet(ctx, e):
