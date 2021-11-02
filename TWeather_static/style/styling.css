@@ -5,7 +5,7 @@ body {
   background: #022C43;
   color:#ffffff;
   overflow-y: hidden;
-  font-family: arial;
+  font-family: 'Segoe UI','Arial';
   font-size: xx-large;
 }
 
@@ -46,6 +46,7 @@ section.search {
   grid-row: 1/2;*/
   grid-area: search;
   background: transparent;
+  margin-top: 5%;
 }
 
 section.alert {
@@ -111,7 +112,7 @@ form.tweet_search input[type=text] {
   font-size: 17px;
   border: 1px solid grey;
   /*float: right;*/
-  width: 240px;
+  width: 120%;
   background: #212121;
 }
 

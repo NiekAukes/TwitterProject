@@ -1,9 +1,13 @@
 <!DOCTYPE html> 
 <html lang="en">
+    
+      
 <head>
     <title>TWeather</title>
     <link rel="icon" href="/Assets/Tweather.ico">
     <link rel="stylesheet" href="/style/styling.css"/>
+    <link rel="stylesheet" href="/style/layout.css"/>
+    <link rel="stylesheet" href="/style/theme.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +17,7 @@
     <script src="/lib/core.js"></script>
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
+    <script src="/lib/tweets.js"></script> 
 </head>
 <body>
     <div class="splash image fade-out">
@@ -21,11 +26,11 @@
     <div class="grid-container">
         <section class="header">
             <!--<img src="/Tweather.ico" alt="TWeather" class="Title_Icon">-->
-            <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="25%" height="auto">
+            <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
             <form class="tweet_search" action="/.../">
-                <input type="text" placeholder="Search..." name="search2">
+                <input type="text" placeholder="Search..." name="search2"/>
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </section>
@@ -35,7 +40,7 @@
         <section class="conditions">
             WEATHER CONDITIONS
         </section>
-        <section class="official">
+        <section id="officialTweets">
             OFFICIAL TWEETS
             <div class="scrollBox">
                 sidusidunfiusdfnusdnfusdnfusdnusdnfudsnfudnfudsnfudsf
@@ -84,6 +89,11 @@
         </section>
 
     </div>
-    <script src="app.js"></script>
+    <script>
+        block('#officialTweets').tweets({
+            memory:20
+        });
+        events.connect('official', '#officialTweets');
+    </script>
 </body>
 </html>
