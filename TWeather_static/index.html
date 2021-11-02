@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/style/styling.css"/>
     <link rel="stylesheet" href="/style/layout.css"/>
     <link rel="stylesheet" href="/style/theme.css"/>
+    <link rel="stylesheet" href="/style/buttons.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,23 +46,23 @@
         </section>
         <section class="official">
             OFFICIAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
             <div class="scrollBox">
                 <div  id="officialTweets">
-                    <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
-                        
-                    </a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </section>
         <section class="personal">
             PERSONAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox1" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
             <div class="scrollBox">
                 <div id="userTweets" class="usertweets">
-                    <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
-                    
-                    </a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </section>
