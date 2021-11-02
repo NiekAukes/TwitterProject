@@ -48,6 +48,6 @@ def Extract(Tweet):
 if __name__ == "__main__":
     x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
     print(Classifier.OfficialTweets[10])
-    a = Extract(x[10])
+    Extract(x[10])
 
 
