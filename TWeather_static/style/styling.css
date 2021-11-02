@@ -78,6 +78,12 @@ section.official {
   background-color: #1D3E53;
   text-align: center;
 }
+section.official > div {
+  min-height: 90%;
+  max-height: 90%;
+  min-width: 100%;
+  max-width: 100%;
+}
 
 section.personal {
   /*grid-column: 3/4;
