@@ -42,15 +42,15 @@
         </section>
         <section class="conditions">
             WEATHER CONDITIONS
+            <div class="weathergraph">
+
+            </div>
         </section>
         <section class="official">
             OFFICIAL WEATHER TWEETS
             <div class="scrollBox">
-                <div  id="officialTweets">
-                    <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
-                        
-                    </a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div  id="officialTweets"> 
+                    
                 </div>
             </div>
         </section>
@@ -58,10 +58,6 @@
             PERSONAL WEATHER TWEETS
             <div class="scrollBox">
                 <div id="userTweets" class="usertweets">
-                    <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
-                    
-                    </a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </section>
@@ -76,6 +72,22 @@
         });
         events.connect('official', '#officialTweets');
     </script>
+    <script>
+        block('#weathergraph').rolling_chart({
+            memory: 150,
+            chart: {
+                yaxis:{
+                    min: -10,
+                    max: 40
+                },
+                xaxis: {
+                    show: false
+                }
+            }
+        });
+        events.connect('sample', '#graph');
+        </script>
+
     <script src="app.js"></script>
 </body>
 </html>
