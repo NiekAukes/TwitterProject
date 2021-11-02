@@ -40,9 +40,9 @@ body {
   grid-gap: 10px;
   max-height: 100%;
   grid-template-areas: "header header search"
-                       "conditions official personal"
                        "alert official personal"
-                       "alert graphs graphs"
+                       "conditions official personal"
+                       "conditions graphs graphs"
   ;
 }
 
@@ -152,7 +152,7 @@ form.tweet_search button {
   float: right;
   width: 60px;
   padding: 10px;
-  background: #2196F3;
+  background: #2BA7DF; /*was 2196F3*/
   color: white;
   font-size: 17px;
   border: 1px solid grey;

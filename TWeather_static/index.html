@@ -43,6 +43,9 @@
         </section>
         <section class="conditions">
             WEATHER CONDITIONS
+            <div class="weathergraph">
+
+            </div>
         </section>
         <section class="official">
             OFFICIAL WEATHER TWEETS
@@ -77,6 +80,22 @@
         });
         events.connect('official', '#officialTweets');
     </script>
+    <script>
+        block('#weathergraph').rolling_chart({
+            memory: 150,
+            chart: {
+                yaxis:{
+                    min: -10,
+                    max: 40
+                },
+                xaxis: {
+                    show: false
+                }
+            }
+        });
+        events.connect('sample', '#graph');
+        </script>
+
     <script src="app.js"></script>
 </body>
 </html>
