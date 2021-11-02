@@ -32,8 +32,8 @@
         <section class="search">
             <div>
                 <form class="tweet_search" action="/.../">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                    <input type="text" placeholder="Search..." name="search2">
+                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search..." name="search2" style="border-radius: 5px;">
                 </form>
             </div>
         </section>
@@ -44,7 +44,7 @@
             WEATHER CONDITIONS
         </section>
         <section class="official">
-            OFFICIAL TWEETS
+            OFFICIAL WEATHER TWEETS
             <div class="scrollBox">
                 <div  id="officialTweets">
                     <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
@@ -55,7 +55,13 @@
             </div>
         </section>
         <section class="personal">
-            PERSONAL TWEETS
+            PERSONAL WEATHER TWEETS
+            <div  id="userTweets">
+                <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
+                    
+                </a> 
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
         </section>
         <section class="graphs">
             WEATHER GRAPHS
@@ -64,7 +70,7 @@
     </div>
     <script>
         block('#officialTweets').tweets({
-            memory:5
+            memory:500
         });
         events.connect('official', '#officialTweets');
     </script>

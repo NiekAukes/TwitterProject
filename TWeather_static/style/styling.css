@@ -9,6 +9,17 @@ body {
   font-family: 'Segoe UI','Arial';
   font-size: xx-large;
 }
+/* Basic style & theme*/
+
+/*"Twitter night mode theme"
+"primary_color": "#243447",     (DARK BLUE)
+"accent_color": "#243447", 
+"highlight_color": "#5b8fb4",   (LIGHT BLUE)
+"primary_text_color": "#ffffff", 
+"secondary_text_color": "#8d8d8d", (LIGHT GREY)
+"window_color": "#1b2836", 
+"content_color": "#1b2836"*/
+
 
 /*Color Scheme
 
@@ -82,11 +93,12 @@ section.official {
   background: #243447;
   text-align: center;
 }
-section.official > div {
+section.official > div, section.personal > div{ /* SCROLLBOX DIV FOR OFFICIAL TWEETS AND USER TWEETS */
   min-height: 93%;
   max-height: 93%;
   min-width: 100%;
   max-width: 100%;
+  margin-left:-1%;
   vertical-align: top;
 }
 
