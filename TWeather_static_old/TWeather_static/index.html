@@ -37,10 +37,10 @@
         </div>
 
         <div class="header officialtweetsheader">Official Tweets</div>
-        <div class="tweetsareaprefab officialtweetsarea">AREA1 for official tweets</div>
+        <div class="tweetsareaprefab officialtweetsarea" id="OfficialTweetArea">AREA1 for official tweets</div>
         <div class="SPACER"></div>
         <div class="header usertweetsheader">User Tweets</div>
-        <div class="tweetsareaprefab usertweetsarea">AREA 2 for user tweets</div>
+        <div class="tweetsareaprefab usertweetsarea" id="UserTweetsArea">AREA 2 for user tweets</div>
     </div>
 
     <div class="grid_item">HENLO THIS IS TEST MEN</div>
@@ -53,5 +53,13 @@
     
     <div class="grid_item">TWeather1</div>
 </div>
+<script>
+    // create a rolling chart block
+block('#OfficialTweetsArea').tweets({
+    memory=20
+});
+//UNIQUEID is placeholder id for python
+events.connect('UNIQUEID', '#OfficialTweetsArea')
+</script>
 </body>
 </html>
