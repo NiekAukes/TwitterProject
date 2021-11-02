@@ -51,6 +51,8 @@ section.header {
   grid-row: 1/2;*/
   grid-area: header;
   background: transparent;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 section.search {
@@ -162,7 +164,7 @@ form.tweet_search button {
 }
 
 form.tweet_search button:hover {
-  background: #0b7dda;
+  background: #2BA7DF; /*was 0b7dda*/
 }
 
 form.tweet_search input:hover {
