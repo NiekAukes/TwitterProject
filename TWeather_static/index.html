@@ -19,6 +19,7 @@
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
     <script src="/lib/tweets.js"></script> 
+    <script src="/lib/weather.js"></script> 
     
 </head>
 <body>
@@ -71,6 +72,7 @@
         </section>
         <section class="graphs">
             WEATHER GRAPHS
+            <div id="test"></div>
         </section>
 
     </div>
@@ -80,6 +82,11 @@
         });
         events.connect('official', '#officialTweets');
     </script>
+
+<script>
+    //block("#test").weather();
+    //events.connect('weather', '#test')
+</script>
     <script>
         block('#weathergraph').rolling_chart({
             memory: 150,

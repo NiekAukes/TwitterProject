@@ -3,11 +3,13 @@ from eca import *
 from eca.generators import start_offline_tweets
 import datetime
 import textwrap
+from WeatherEventGen import *
+import Classifier
 
 @event('init')
 def setup(ctx, e):
-   start_offline_tweets('data/weer.json', time_factor=10000, event_name='chirp')
-   #start some action to display the weather stats (eventname for graph updateing is 'weather_update_graph_update')
+   start_tweets(Classifier.RegularTweets, time_factor=100000, event_name='chirp')
+   #tweetonce(Classifier.OfficialTweets[0])
 
 @event('chirp')
 def tweet(ctx, e):
@@ -29,6 +31,7 @@ def tweet(ctx, e):
 
    # generate output
    emit('official', tweet)
+   emit("weather", tweet)
 
 @event('weather_update_rawtext_update')
 def updateRawText(context  ,e):
