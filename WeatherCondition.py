@@ -14,7 +14,9 @@ def Extract(Tweet):
     Temp = Tweet.find("-T")
 
     #Time 
-    if "-T" in Tweet:
+    if Time == -1:
+        return None
+    else:
         print("Time: " + Tweet[14:22])
     #Humidity in percentage
     if "Hum" in Tweet:
@@ -43,9 +45,9 @@ def Extract(Tweet):
 
 
 
-
-x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
-print(Classifier.OfficialTweets[10])
-Extract(x[10])
+if __name__ == "__main__":
+    x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
+    print(Classifier.OfficialTweets[10])
+    Extract(x[10])
 
 
