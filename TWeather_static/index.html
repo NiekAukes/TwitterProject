@@ -30,10 +30,12 @@
             <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
-            <form class="tweet_search" action="/.../">
-                <input type="text" placeholder="Search..." name="search2">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <div>
+                <form class="tweet_search" action="/.../">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search..." name="search2">
+                </form>
+            </div>
         </section>
         <section class="alert">
             WEATHER ALERT
@@ -45,7 +47,10 @@
             OFFICIAL TWEETS
             <div class="scrollBox">
                 <div  id="officialTweets">
-
+                    <a class="twitter-timeline" data-lang="en" data-theme="dark"> <!--/*href="https://twitter.com/weatherchannel?ref_src=twsrc%5Etfw"-->
+                        
+                    </a> 
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </section>
