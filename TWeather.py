@@ -6,7 +6,7 @@ import textwrap
 
 @event('init')
 def setup(ctx, e):
-   start_offline_tweets('batatweets.txt', time_factor=100000, event_name='chirp')
+   start_offline_tweets('data/weer.json', time_factor=100000, event_name='chirp')
 
 @event('chirp')
 def tweet(ctx, e):
@@ -18,7 +18,6 @@ def tweet(ctx, e):
 
    # nicify text
    text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
-
+   print(text)
    # generate output
-   output = "[{}] {} (@{}):\n{}".format(time, tweet['user']['name'], tweet['user']['screen_name'], text)
-   emit('tweet', output)
+   emit('official', tweet)
