@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/style/styling.css"/>
     <link rel="stylesheet" href="/style/layout.css"/>
     <link rel="stylesheet" href="/style/theme.css"/>
+    <link rel="stylesheet" href="/style/buttons.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,27 +32,43 @@
             <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
-            <form class="tweet_search" action="/.../">
-                <input type="text" placeholder="Search..." name="search2">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <div>
+                <form class="tweet_search" action="/.../">
+                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search..." name="search2" style="border-radius: 5px;">
+                </form>
+            </div>
         </section>
         <section class="alert">
             WEATHER ALERT
         </section>
         <section class="conditions">
             WEATHER CONDITIONS
+            <div class="weathergraph">
+
+            </div>
         </section>
         <section class="official">
-            OFFICIAL TWEETS
+            OFFICIAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
             <div class="scrollBox">
                 <div  id="officialTweets">
-
                 </div>
             </div>
         </section>
         <section class="personal">
-            PERSONAL TWEETS
+            PERSONAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox1" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
+            <div class="scrollBox">
+                <div id="userTweets" class="usertweets">
+                </div>
+            </div>
         </section>
         <section class="graphs" id="test">
             WEATHER GRAPHS
@@ -60,13 +77,29 @@
     </div>
     <script>
         block('#officialTweets').tweets({
-            memory:5
+            memory:500
         });
 
         //block("#test").weather();
         events.connect('official', '#officialTweets');
         //events.connect('weather', '#test')
     </script>
+    <script>
+        block('#weathergraph').rolling_chart({
+            memory: 150,
+            chart: {
+                yaxis:{
+                    min: -10,
+                    max: 40
+                },
+                xaxis: {
+                    show: false
+                }
+            }
+        });
+        events.connect('sample', '#graph');
+        </script>
+
     <script src="app.js"></script>
 </body>
 </html>
