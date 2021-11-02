@@ -79,10 +79,11 @@ section.official {
   text-align: center;
 }
 section.official > div {
-  min-height: 90%;
-  max-height: 90%;
+  min-height: 93%;
+  max-height: 93%;
   min-width: 100%;
   max-width: 100%;
+  vertical-align: top;
 }
 
 section.personal {
@@ -110,7 +111,6 @@ form.tweet_search>input,form.tweet_search>button{
   /*float:right;*/
   max-width:300px;
   display: inline-block;
-  float: right;
 }
 
 form.tweet_search input[type=text] {
