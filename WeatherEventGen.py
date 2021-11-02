@@ -5,9 +5,10 @@ from eca.generators import *
 import json
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
+def push_single_tweet(tweet_single):
+    pass
 
-
-def custom_tweet_gen(stop, data, time_factor=1000):
+def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
     """
     Offline tweet replay.
 
@@ -17,7 +18,6 @@ def custom_tweet_gen(stop, data, time_factor=1000):
 
     # timing functions return false if we need to abort
     def delayer(duration):
-        logger.debug("Delay for next tweet {}s ({}s real)".format(delay, delay/time_factor))
         return not stop.wait(delay / time_factor)
 
     def immediate(duration):
@@ -30,16 +30,13 @@ def custom_tweet_gen(stop, data, time_factor=1000):
     
     last_time = None
     lines = 0
-    for line in data:
+    for tweet in data:
         lines += 1
 
-        tweet = json.loads(line)
-            
-
-            # time scale the tweet
+        # time scale the tweet
         tweet_time = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
-
-        if (tweet_time.date() != datetime.today()):
+        tweetdate = tweet_time.date()
+        if ((tweetdate.day is not datetime.today().day) or (tweetdate.month is not datetime.today().month) and dateconstraint):
             continue
 
         if not last_time:
@@ -56,7 +53,7 @@ def custom_tweet_gen(stop, data, time_factor=1000):
             break
 
 
-def start_tweets(data_file, event_name='tweet', aux_name='tweeter', **kwargs):
+def start_tweets(data, event_name='tweet', aux_name='tweeter', **kwargs):
     context = get_context()
     if context is None:
         raise NotImplementedError("Can not start offline tweet replay outside of a context.")
