@@ -24,7 +24,7 @@ def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
 
 
     
-    last_time = None
+    last_time = datetime.strptime("Mon Oct 20 15:55:54 +0000 2011", '%a %b %d %H:%M:%S %z %Y')
     lines = 0
     for tweet in data:
         lines += 1
@@ -33,6 +33,8 @@ def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
         tweet_time = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
         tweetdate = tweet_time.date()
         if ((tweetdate.day is not datetime.today().day) or (tweetdate.month is not datetime.today().month)) and dateconstraint:
+            continue
+        if (tweet_time < last_time):
             continue
 
         if not last_time:

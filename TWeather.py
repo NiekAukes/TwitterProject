@@ -5,11 +5,12 @@ import datetime
 import textwrap
 from WeatherEventGen import *
 import Classifier
+import WeatherCondition
 
 @event('init')
 def setup(ctx, e):
-   start_tweets(Classifier.OfficialTweets, time_factor=1000, event_name='chirpofficial')
-   start_tweets(Classifier.RegularTweets, time_factor=1000, event_name='chirpregular')
+   start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
+   start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    #tweetonce(Classifier.OfficialTweets[0])
 
 @event('chirpofficial')
@@ -28,7 +29,10 @@ def tweet(ctx, e):
    # nicify text (NOT USED RIGHT NOW)
    #text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
    
-   #update the weather graph based on location data.
+   #plug in weather conditions
+
+   
+   
 
    # generate output
    emit('official', tweet)
