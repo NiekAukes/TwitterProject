@@ -12,7 +12,6 @@ def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
     Takes a datafile formatted with 1 tweet per line, and generates a sequence of
     scaled realtime items.
     """
-    print(dateconstraint)
     # timing functions return false if we need to abort
     def delayer(duration):
         return not stop.wait(delay / time_factor)

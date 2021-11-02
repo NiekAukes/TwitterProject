@@ -3,6 +3,8 @@ from eca import *
 from eca.generators import start_offline_tweets
 import datetime
 import textwrap
+from WeatherEventGen import *
+import Classifier
 
 @event('init')
 def setup(ctx, e):
@@ -30,6 +32,7 @@ def tweet(ctx, e):
 
    # generate output
    emit('official', tweet)
+   emit("weather", tweet)
 
 @event('chirpregular')
 def tweet(ctx, e):
