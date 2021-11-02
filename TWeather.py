@@ -6,7 +6,7 @@ import textwrap
 
 @event('init')
 def setup(ctx, e):
-   start_offline_tweets('data/weer.json', time_factor=100000, event_name='chirp')
+   start_offline_tweets('data/weer.json', time_factor=10000, event_name='chirp')
 
 @event('chirp')
 def tweet(ctx, e):

@@ -43,8 +43,10 @@
         </section>
         <section class="official">
             OFFICIAL TWEETS
-            <div class="scrollBox" id="officialTweets">
-                sdfsfds
+            <div class="scrollBox">
+                <div  id="officialTweets">
+
+                </div>
             </div>
         </section>
         <section class="personal">
@@ -57,7 +59,7 @@
     </div>
     <script>
         block('#officialTweets').tweets({
-            memory:20
+            memory:5
         });
         events.connect('official', '#officialTweets');
     </script>
