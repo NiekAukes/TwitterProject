@@ -78,8 +78,21 @@
         block('#officialTweets').tweets({
             memory:500
         });
+        
         events.connect('official', '#officialTweets');
     </script>
+    <script>
+        block('#userTweets').tweets({
+            memory:500
+        });
+        
+        events.connect('regular', '#userTweets');
+    </script>
+
+<script>
+    //block("#test").weather();
+    //events.connect('weather', '#test')
+</script>
     <script>
         block('#weathergraph').rolling_chart({
             memory: 150,
