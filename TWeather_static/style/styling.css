@@ -37,7 +37,7 @@ body {
   grid-template-rows: 1fr 4.5fr 1.5fr 3fr 0.75fr;
   height: 100vh;
   margin: 1em;
-  grid-gap: 5px;
+  grid-gap: 10px;
   max-height: 100%;
   grid-template-areas: "header header search"
                        "conditions official personal"

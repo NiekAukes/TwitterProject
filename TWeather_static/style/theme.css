@@ -64,7 +64,7 @@ pre {
 }
 
 .tweet-list .stream-item:hover {
-    background-color: rgb(54, 54, 54); /*was #EEE*/
+    background-color: rgba(0,0,0,0.25); /*was #EEE*/
 }
 
 .tweet-list li.stream-item {
@@ -118,8 +118,8 @@ pre {
 
 .tweet-list a:hover,
 .tweet-list a:focus {
-    color: #1b3296; /*was 0084b4*/
-    text-decoration: underline
+    color: #afdeff; /*was 0084b4*/
+    text-decoration: none
 }
 
 .tweet-list a.account-group:hover,
