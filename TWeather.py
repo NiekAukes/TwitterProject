@@ -58,15 +58,17 @@ def tweet(ctx, e):
 
 
 
-#for updating graph
-@event('weather_update_graph_update')
-def updateGraph(context,e):
-   emit('sample',{
+#for making search functionality and graph work, in progress
+@event('search')
+def updategraph(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
+   print("Testing, is the search button working???")
+   
+   #get location from search thing
+   
+   #get all the weather info from that location
+   sample = e.data
+   #emit into graph:
+   emit('updateGraph',{
     'action': 'add',
     'value': sample
    })
-
-#for making search functionality work, in progress
-@event('search')
-def searchbtn(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
-   pass

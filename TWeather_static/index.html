@@ -17,6 +17,7 @@
     <script src="/lib/core.js"></script>
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
+    <script src="lib/form.js"></script>
     <script src="/lib/tweets.js"></script> 
     
 </head>
@@ -30,10 +31,10 @@
             <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
-            <div>
-                <form class="tweet_search" id="searchForm"><!--action="/.../"-->
+            <div id="form">
+                <form class="tweet_search" ><!--action="/.../"-->
                     <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
-                    <input type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
+                    <input id="searchTextArea" type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
                 </form>
             </div>
         </section>
@@ -92,7 +93,6 @@
         });
         events.connect('regular', '#userTweets');
     </script>
-    
     <script>
         block('#graph').rolling_chart({
             memory: 150,
@@ -106,11 +106,13 @@
                 }
             }
         });
-        events.connect('sample', '#graph');
-        </script>
+        events.connect('updateGraph', '#graph');
+    </script>
     <script>
-        block('#searchForm').form({
-            target: '/api/search'
+        block('#form').form({
+            target: '/api/search',
+            callback: function() {
+            $('#location').val('');}  
         });
     </script>
     <script src="app.js"></script>
