@@ -14,8 +14,28 @@ block.fn.weather = function(config) {
 */
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
-        //var $content = $('<p>testtesttest</p>');
 
+        var $img = $base.find("#weatherimage");
+        var $currtemp = $base.find("#currtemp");
+        var $location = $base.find("#location");
+        //var $content = $('<p>testtesttest</p>');
+        var imgurl = ""
+        switch (tweet.Condition) {
+            case "Sunny":
+                imgurl = "Assets/WeatherCond/animated/day.svg"
+                break;
+            case "Cloudy":
+                imgurl = "Assets/WeatherCond/animated/cloudy-day-1.svg"
+                break;
+            case "Rain":
+                imgurl = "Assets/WeatherCond/animated/rainy-1.svg"
+                break;
+        }
+        $img.attr("src", imgurl);
+        $currtemp.html($(tweet.temperature + "°C, " + tweet.Condition));
+
+        $location.html($("Emmen"));
+        //algorithm to deduce conditions
         
 /*
         var $tweet = $('<div class="tweet"></div>');
