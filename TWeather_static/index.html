@@ -1,14 +1,14 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-    
-      
+
+
 <head>
     <title>TWeather</title>
     <link rel="icon" href="/Assets/Tweather.ico">
-    <link rel="stylesheet" href="/style/styling.css"/>
-    <link rel="stylesheet" href="/style/layout.css"/>
-    <link rel="stylesheet" href="/style/theme.css"/>
-    <link rel="stylesheet" href="/style/buttons.css"/>
+    <link rel="stylesheet" href="/style/styling.css" />
+    <link rel="stylesheet" href="/style/layout.css" />
+    <link rel="stylesheet" href="/style/theme.css" />
+    <link rel="stylesheet" href="/style/buttons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,11 +17,12 @@
     <script src="/lib/jquery.flot.min.js"></script>
     <script src="/lib/core.js"></script>
     <script src="/lib/charts.js"></script>
-    <script src="/lib/log.js"></script> 
-    <script src="/lib/tweets.js"></script> 
-    <script src="/lib/weather.js"></script> 
-    
+    <script src="/lib/log.js"></script>
+    <script src="/lib/tweets.js"></script>
+    <script src="/lib/weather.js"></script>
+    <script src="/lib/CustomTweeter.js"></script>
 </head>
+
 <body>
     <div class="splash image fade-out">
         <img src="/Assets/Tweather.png" alt="TWeather">
@@ -45,7 +46,7 @@
         <section class="conditions">
             WEATHER CONDITIONS
             <div class="weathergraph">
-
+                <div id="mod"></div>
             </div>
         </section>
         <section class="official">
@@ -55,7 +56,7 @@
                 <span class="slider round"></span>
             </label>
             <div class="scrollBox">
-                <div  id="officialTweets">
+                <div id="officialTweets">
                 </div>
             </div>
         </section>
@@ -78,33 +79,36 @@
     </div>
     <script>
         block('#officialTweets').tweets({
-            memory:500
+            memory: 500
         });
-        
+
         events.connect('official', '#officialTweets');
     </script>
-
-<script>
-    //block("#test").weather();
-    //events.connect('weather', '#test')
-</script>
+    <script>
+        //block("#test").weather();
+        //events.connect('weather', '#test')
+    </script>
     <script>
         block('#userTweets').tweets({
-            memory:500
+            memory: 500
         });
-        
+
         events.connect('regular', '#userTweets');
     </script>
 
-<script>
-    //block("#test").weather();
-    //events.connect('weather', '#test')
-</script>
+    <script>
+        block("#test").weather();
+        events.connect('weather', '#test')
+    </script>
+    <script>
+        block("#mod").tweetsmodern();
+        events.connect('modern', '#mod')
+    </script>
     <script>
         block('#weathergraph').rolling_chart({
             memory: 150,
             chart: {
-                yaxis:{
+                yaxis: {
                     min: -10,
                     max: 40
                 },
@@ -114,8 +118,9 @@
             }
         });
         events.connect('sample', '#graph');
-        </script>
-
+    </script>
+    <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="app.js"></script>
 </body>
+
 </html>

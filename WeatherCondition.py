@@ -3,9 +3,11 @@ import Classifier
 
 Classifier.OfficialTweets
 
-ret = {}
+
 
 def Extract(Tweet):
+    Tweet = 'has_{} 1'.format(Tweet)
+    ret = {}
     Humidity = Tweet.find("Hum")
     Time = Tweet.find("-T")
     Wind = Tweet.find("wind")
@@ -109,13 +111,13 @@ def SearchTweet(Tweet, ret):
 
 #test
 if __name__ == "__main__":
-    x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
-   # print(Classifier.OfficialTweets[0])
+    #x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
+
+    print(Extract(Classifier.OfficialTweets[0]))
+    print(Extract(Classifier.OfficialTweets[1]))
     print("-----------------------")
     print("-----------------------")
-    #Extract(x[0])
     #print(ret)
-    SearchTweet(x, ret)
 
 
 

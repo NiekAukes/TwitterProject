@@ -14,8 +14,9 @@ block.fn.weather = function(config) {
 */
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
-        //var $content = $('<p>testtesttest</p>');
-
+        $base.children().last().remove();
+        var $item = $('<p>' + tweet.text + '</p>');
+        $base.prepend($item);
         
 /*
         var $tweet = $('<div class="tweet"></div>');
