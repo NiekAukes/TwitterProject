@@ -13,35 +13,27 @@ def SearchTweet(x):
     print('Filtered Dictionary : ')
     print(newret)
 
+def Search(Tweet):
+    newlist = []
+    Tweet1 = 'has_{} 1' .format(Tweet)
+    end = Tweet1.find("n_r")
+    print(end)
+    for i in range(3):
+        print(Tweet[i])
+    newlist.append(Tweet[14:140])
+    print(newlist)
 
-        
-        
-def test(Tweet):
-    newret = dict()
-<<<<<<< Updated upstream
-    search = input("Search words: ")
-    for (key, value) in Tweet.items():
-        print("hello")
-        if key == search:
-            print(key)
-=======
-    #search = input("Search words: ")
-    for (key, value) in Tweet.items():
-        print("hello")
->>>>>>> Stashed changes
-    
-    
 
 
 if __name__ == "__main__":
-    #print((Extract(Classifier.OfficialTweets[1])))
+    #print(Classifier.OfficialTweets[0])
+    Search(Classifier.OfficialTweets[0])
     #SearchTweet(Classifier.OfficialTweets)
-    test(Classifier.OfficialTweets)
+    
 
 
 
 
-<<<<<<< Updated upstream
 
 
 
@@ -53,5 +45,3 @@ if __name__ == "__main__":
     
     
 
-=======
->>>>>>> Stashed changes
