@@ -1,8 +1,10 @@
 body { 
+  min-height:768;
+  min-width: 1366; /*Make minimum window size 768x1366, just big enough to not break the site
+                    it's small enough that most people can still use it, further decreasing window size would require scaling text and adjusting all sizes.*/
   margin: 0;
   height: 100vh;
   max-height: 100%;
-  /*background: #022C43;*/
   background: #1b2836;
   color:#ffffff;
   overflow-y: hidden;
@@ -15,9 +17,9 @@ body {
 "primary_color": "#243447",     (DARK BLUE)
 "accent_color": "#243447", 
 "highlight_color": "#5b8fb4",   (LIGHT BLUE)
-"primary_text_color": "#ffffff", 
+"primary_text_color": "#ffffff", (WHITE)
 "secondary_text_color": "#8d8d8d", (LIGHT GREY)
-"window_color": "#1b2836", 
+"window_color": "#1b2836", (DARK PASTEL BLUE-ISH)
 "content_color": "#1b2836"*/
 
 
@@ -141,8 +143,8 @@ section.official {
   text-align: center;
 }
 section.official > div, section.personal > div{ /* SCROLLBOX DIV FOR OFFICIAL TWEETS AND USER TWEETS */
-  min-height: 93%;
-  max-height: 93%;
+  min-height: 90%;
+  max-height: 90%;
   min-width: 100%;
   max-width: 100%;
   margin-left:-1%;
