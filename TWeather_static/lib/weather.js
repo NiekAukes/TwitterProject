@@ -14,8 +14,13 @@ block.fn.weather = function(config) {
 */
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
+
+        var $img = $base.find("#weatherimage");
+        var $currtemp = $base.find("#currtemp");
+        var $location = $base.find("#location");
         //var $content = $('<p>testtesttest</p>');
 
+        //algorithm to deduce 
         
 /*
         var $tweet = $('<div class="tweet"></div>');
