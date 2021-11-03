@@ -11,6 +11,7 @@ import WeatherCondition
 def setup(ctx, e):
    start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
    start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
+   
    #tweetonce(Classifier.OfficialTweets[0])
 
 @event('chirpofficial')
@@ -22,17 +23,6 @@ def tweet(ctx, e):
    #class of tweet is dict, so try to change the value of the image keys to the default twitter user image.
    tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
    tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
-
-   # parse date (NOT USED RIGHT NOW)
-   #time = datetime.datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
-   
-   # nicify text (NOT USED RIGHT NOW)
-   #text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
-   
-   #plug in weather conditions
-
-   
-   
 
    # generate output
    emit('official', tweet)
@@ -55,7 +45,7 @@ def tweet(ctx, e):
    #text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
    
    #update the weather graph based on location data.
-
+   
    # generate output
    emit('regular', tweet)
 
@@ -68,4 +58,4 @@ def updateGraph(context,e):
    emit('sample',{
     'action': 'add',
     'value': sample
-})
+   })
