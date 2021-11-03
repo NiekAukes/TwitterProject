@@ -35,6 +35,7 @@ cachedOfficialTweets = []
 cachedRegularTweets = []
 
 
+
 #Adding a handler for the search button press.
 def add_request_handlers(httpd):
     httpd.add_route('/api/search', http.GenerateEvent('Search'), methods=['POST'])
@@ -79,6 +80,7 @@ def setup(ctx, e):
    thread.start()
    #start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    
+   
    #tweetonce(Classifier.OfficialTweets[0])
 
 def postTweet(tweet, channel):
@@ -112,8 +114,18 @@ def tweet(ctx, e):
              return
       
    emit('official', tweetls)
-   
-   emit("weather", tweetls[-1])
+   # generate output
+   weatherCond = (WeatherCondition.Extract(tweet[-1]))
+   print(weatherCond['Temperature'])
+   print(weatherCond['Time'])
+
+   emit('updateGraph',{
+    'action': 'add',
+    'value': {
+       'Time':1,#weatherCond['Time'],
+       'Temp':weatherCond['Temperature']}
+   })
+
 
 @event('chirpregular')
 def tweet(ctx, e):
@@ -139,15 +151,13 @@ def tweet(ctx, e):
 
 
 
-#for updating graph
-@event('weather_update_graph_update')
-def updateGraph(context,e):
-   emit('sample',{
-    'action': 'add',
-    'value': sample
-   })
-
-#for making search functionality work, in progress
+#for making search functionality and graph work, in progress
 @event('search')
-def searchbtn(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
-   pass
+def search(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
+   print("Testing, is the search button working???")
+
+# define a normal Python function
+def clip(lower, value, upper):
+    return max(lower, min(value, upper))
+
+   

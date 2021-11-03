@@ -17,6 +17,7 @@
     <script src="/lib/core.js"></script>
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
+    <script src="lib/form.js"></script>
     <script src="/lib/tweets.js"></script> 
     <script src="/lib/form.js"></script> 
     <script>
@@ -37,10 +38,10 @@
             <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
-            <div id="searchForm">
+            <div id="form">
                 <form class="tweet_search" ><!--action="/.../"-->
-                    <input placeholder="Search for..." name="searchtext" style="border-radius: 5px;"/>
-                    <button type="submit" value="search" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <input id="searchTextArea" type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
                 </form>
             </div>
         </section>
@@ -99,10 +100,11 @@
         });
         events.connect('regular', '#userTweets');
     </script>
-    
     <script>
+        // create a rolling chart block
         block('#graph').rolling_chart({
-            memory: 150,
+            memory: 50,
+            
             chart: {
                 yaxis:{
                     min: -10,
@@ -113,11 +115,13 @@
                 }
             }
         });
-        events.connect('sample', '#graph');
-        </script>
+        events.connect('updateGraph', '#graph');
+    </script>
     <script>
-        block('#searchForm').form({
-            target: '/api/search'
+        block('#form').form({
+            target: '/api/search',
+            callback: function() {
+            $('#location').val('');}  
         });
     </script>
     <script src="app.js"></script>

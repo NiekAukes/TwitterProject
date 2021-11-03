@@ -3,11 +3,12 @@ import Classifier
 
 Classifier.OfficialTweets
 
-ret ={}
+
 
 def Extract(Tweet):
-    Tweet = 'has_{} 1' .format(Tweet)
+    newlist = []
     ret = {}
+    Tweet = 'has_{} 1' .format(Tweet)
     Humidity = Tweet.find("Hum")
     Time = Tweet.find("-T")
     Wind = Tweet.find("wind")
@@ -21,8 +22,14 @@ def Extract(Tweet):
     #Time 
     if Time == -1:
         return None
-    else:
-        ret['Time'] = Tweet[14:22]     
+    elif Tweet[Date + 13] == "'":
+        i = 1
+        tempT = []
+        for i in range(8):
+            tempT.append(Tweet[Date + 25 + i])
+            i += 1
+        z = ''.join(tempT)
+        ret['Time'] = z
     #Humidity in percentage
     if Humidity == -1:
         return None
@@ -69,11 +76,17 @@ def Extract(Tweet):
             i += 1
         x = ''.join(temp1)
         ret['Temperature'] = x
-    #Date, Created At
+    #Date, Created At [439:449]
     if Date == -1:
         return None
-    else:
-        ret['Date'] = Tweet[439:449]
+    elif Tweet[Date + 13] == "'":
+        i = 1
+        temp = []
+        for j in range(10,):
+            temp.append(Tweet[Date + 14 + j])
+            i += 1
+        k = ''.join(temp)
+        ret['Date'] = k
     #location
     if location == -1:
         return None
@@ -87,13 +100,29 @@ def Extract(Tweet):
         ret['location'] = j
     return ret
 
+def AllTweets(Tweet):
+    for i in range(len(Tweet)):
+        print(Extract(Classifier.OfficialTweets[i]))
+
 
 #test
 if __name__ == "__main__":
-    print(Classifier.OfficialTweets[0])
-    print(Extract(Classifier.OfficialTweets[0]))
-    print(Extract(Classifier.OfficialTweets[1]))
-    print("-----------------------")
-    print("-----------------------")
+
+    print(Classifier.OfficialTweets[400])
+    print(Extract(Classifier.OfficialTweets[400]))
+    #print(Classifier.OfficialTweets[0])
+    #print(Extract(Classifier.OfficialTweets[0]))
+    #print("-----------------------")
+    #print("-----------------------")
     #print(ret)
+
+
+
+
+
+
+ 
+   
+
+
 

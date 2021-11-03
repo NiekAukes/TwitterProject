@@ -118,10 +118,7 @@ section.conditions {
   font-weight:600;
   color:#bebebe;
 }
-#graph{
-  height: 100%;
-  vertical-align: bottom;
-}
+
 .weatherGraphHeader{
   float:left;
   height:10%;
