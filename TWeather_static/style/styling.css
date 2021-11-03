@@ -42,7 +42,7 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 4.5fr 1.5fr 3fr 0.75fr;
+  grid-template-rows: 1fr 3fr 3fr 3fr 0.75fr;
   height: 100vh;
   margin: 1em;
   grid-gap: 10px;
@@ -50,7 +50,7 @@ body {
   grid-template-areas: "header header search"
                        "alert official personal"
                        "conditions official personal"
-                       "conditions graphs graphs"
+                       "conditions official personal"
   ;
 }
 
@@ -72,30 +72,24 @@ section.search {
 }
 
 section.alert {
-  /*grid-column: 1/2;
-  grid-row: 2/3;*/
   grid-area: alert;
   border-radius: 10px;
   padding: 10px;
-  /*background-color: #1D3E53;*/
   background: #243447;
   text-align: center;
 }
 
 section.conditions {
-  /*grid-column: 1/2;
-  grid-row: 3/5;*/
   grid-area: conditions;
   border-radius: 10px;
   padding: 10px;
-  /*background-color: #1D3E53;*/
   background: #243447;
   text-align: center;
 }
 .CurrentWeather{
   width:100%;
-  min-height:25%;
-  max-height:25%;
+  min-height:22.5%;
+  max-height:22.5%;
   background-color: transparent;
 }
 .currWeatherItem{
@@ -104,21 +98,16 @@ section.conditions {
   font-weight:normal;
 }
 .WeatherConditionImage{
-  /*width:25%;*/
   float:left;
   width:25%;
   margin-top:-7.5%; margin-right:-2.5%;
 }
 .currTemp_weatherCondDescr{
-  /*width:35%;
-  align-self:flex-start;*/
   text-align: left;
   float:left;
   padding-top:3%;
 }
 .location{
-  /*width:40%;
-  align-self: flex-end;*/
   text-align: right;
   float:left;
   vertical-align: bottom;
@@ -127,21 +116,27 @@ section.conditions {
   font-weight:600;
   color:#bebebe;
 }
-.currWeatherWeatherGraph{
-  height: 65%;
-  border:#FFFFFF 4px solid;
-  text-align: left;
+#graph{
+  height: 100%;
+  vertical-align: bottom;
+}
+.weatherGraphHeader{
+  float:left;
+  height:10%;
+  margin-top:-4%;
+  padding-left:10px;
+}
+.currWeatherWeatherGraphContainer{
+  margin-top:5%;
+  height:62.5%;
+  vertical-align: bottom;
 }
 
 
-
 section.official {
-  /*grid-column: 2/3;
-  grid-row: 2/4;*/
   grid-area: official;
   border-radius: 10px;
   padding: 10px;
-  /*background-color: #1D3E53;*/
   background: #243447;
   text-align: center;
 }
@@ -165,16 +160,6 @@ section.personal {
   text-align: center;
 }
 
-section.graphs {
-  /*grid-column: 2/4;
-  grid-row: 4/5;*/
-  grid-area: graphs;
-  border-radius: 10px;
-  padding: 10px;
-  /*background-color: #1D3E53;*/
-  background: #243447;
-  text-align: left;
-}
 
 form.tweet_search>button,form.tweet_search>input{
   color: #ffffff;

@@ -33,7 +33,7 @@
             <div>
                 <form class="tweet_search" action="/.../">
                     <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
-                    <input type="text" placeholder="Search..." name="search2" style="border-radius: 5px;">
+                    <input type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
                 </form>
             </div>
         </section>
@@ -47,11 +47,15 @@
                 <div class="currTemp_weatherCondDescr currWeatherItem">xx°C, Cloudy</div>
                 <div class="location currWeatherItem">Enschede</div>
             </div>
-            <div id="graph" class="currWeatherWeatherGraph">
-                GIMME GRAPH PLS
+            <div class="currWeatherWeatherGraphContainer">
+                <div class="weatherGraphHeader bigheader non-selectable" ondragstart="return false">Weather graph</div>
+                <div id="graph">
+                    
+                </div>
             </div>
             
         </section>
+
         <section class="official non-selectable bigheader" ondragstart="return false">
             OFFICIAL WEATHER TWEETS
             <label class="switch">
@@ -74,14 +78,11 @@
                 </div>
             </div>
         </section>
-        <section class="graphs non-selectable bigheader" ondragstart="return false">
-            WEATHER GRAPHS
-        </section>
 
     </div>
     <script>
         block('#officialTweets').tweets({
-            memory:500
+            memory:100
         });
         events.connect('official', '#officialTweets');
     </script>
@@ -94,7 +95,7 @@
                     max: 40
                 },
                 xaxis: {
-                    show: false
+                    show:false
                 }
             }
         });
