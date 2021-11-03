@@ -118,7 +118,7 @@ section.conditions {
   max-height:22.5%;
   margin-top:5%;
   background-color: transparent;
-  display:flex;
+  display:block;
 }
 .extraWeatherStats{
   height: 50%;
@@ -159,7 +159,7 @@ section.conditions {
 }
 .currtime {
   float:right;
-  margin-right: 2.5%;
+  margin-right: 2%;
 }
 
 .weatherGraphHeader{

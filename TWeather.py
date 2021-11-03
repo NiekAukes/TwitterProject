@@ -34,12 +34,11 @@ def tweet(ctx, e):
 
    # generate output
    emit('official', tweet)
-   weatherCond = (WeatherCondition.Extract(tweet))
-   print(weatherCond)
-   
-   #print(weatherCond['Temperature'])
-   #print(weatherCond['Time'])
 
+   #retrieve weatherconditions from the tweets
+   weatherCond = (WeatherCondition.Extract(tweet))
+
+   #update the graph
    emit('updateGraph',{
     'action': 'add',
     'value': {
@@ -63,7 +62,7 @@ def tweet(ctx, e):
 
 #for making search functionality and graph work, in progress
 @event('search')
-def search(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
+def search_btn(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
    print("Testing, is the search button working???")
 
 # define a normal Python function

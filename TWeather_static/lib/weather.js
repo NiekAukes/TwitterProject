@@ -33,7 +33,8 @@ block.fn.weather = function(config) {
         w_temp = parseFloat(wCond['Temperature']);
 
         //EXAMPLE TIME: "Tue Oct 11 09:24:35 +0000 2011"
-        w_time_hour = (wCond['Time'][wCond['Time'].length - 1]).split(':')[0]
+        w_time_hour = wCond['Time'].split(':')[0]
+        
         //set a boolean if it is day or not, to show day/night versions of the weather condition pictures
         isDay = w_time_hour >= 6 && w_time_hour <= 18 ? true : false;
         
@@ -75,7 +76,7 @@ block.fn.weather = function(config) {
         //set currtemperature, location and time appropriately
         $currtemp.innerHTML = wCond['Temperature'] + "°C, " + condition;
         $location.innerHTML = wCond['location'];
-        $currtime.innerHTML = (wCond['Time']).join(' ');
+        $currtime.innerHTML = wCond['Time'];
        
         //also set the humidity, wind speed and air pressure
         $humidity.innerHTML = "Humidity: " + wCond['Humidity']+"%";
