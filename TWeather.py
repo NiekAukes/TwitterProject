@@ -46,7 +46,7 @@ def add_request_handlers(httpd):
 def rqSearch(ctx, e):
    print(e.data)
    global searchval 
-   searchval = e.data['text']
+   searchval = e.data['search2'] #I don't know why they called it search2
 
    emit('official', {}) #signal to clear the twitter feed
    emit('regular', {})
