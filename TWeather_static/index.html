@@ -1,0 +1,118 @@
+<!DOCTYPE html> 
+<html lang="en">
+      
+<head>
+    <title>TWeather</title>
+    <link rel="icon" href="/Assets/Tweather.ico">
+    <link rel="stylesheet" href="/style/styling.css"/>
+    <link rel="stylesheet" href="/style/layout.css"/>
+    <link rel="stylesheet" href="/style/twitter_feed_theme.css"/>
+    <link rel="stylesheet" href="/style/buttons.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/lib/jquery-2.1.1.min.js"></script>
+    <script src="/lib/jquery.flot.min.js"></script>
+    <script src="/lib/core.js"></script>
+    <script src="/lib/charts.js"></script>
+    <script src="/lib/log.js"></script> 
+    <script src="/lib/tweets.js"></script> 
+    
+</head>
+<body>
+    <div class="splash image fade-out">
+        <img src="/Assets/Tweather.png" alt="TWeather">
+    </div>
+    <div class="grid-container">
+        <section class="header" ondragstart="return false">
+            <!--ondragstart return false makes sure that the user cannot drag the element. In the CSS, user-select:none ensures that they cannot select it either-->
+            <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
+        </section>
+        <section class="search">
+            <div>
+                <form class="tweet_search" id="searchForm"><!--action="/.../"-->
+                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
+                </form>
+            </div>
+        </section>
+        <section class="alert non-selectable bigheader" ondragstart="return false">
+            WEATHER ALERT
+        </section>
+        <section class="conditions non-selectable bigheader" ondragstart="return false">
+            WEATHER CONDITIONS
+            <div class="CurrentWeather" id="weather">
+                <img src="Assets/WeatherCond/animated/cloudy-day-1.svg" class="WeatherConditionImage currWeatherItem" id="weatherimage">
+                <div class="currTemp_weatherCondDescr currWeatherItem" id="currtemp">xx°C, Cloudy</div>
+                <div class="location currWeatherItem" id="location">Enschede</div>
+            </div>
+            <div class="currWeatherWeatherGraphContainer">
+                <div class="weatherGraphHeader bigheader non-selectable" ondragstart="return false">Weather graph</div>
+                <div id="graph">
+                    
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="official non-selectable bigheader" ondragstart="return false">
+            OFFICIAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
+            <div class="scrollBox">
+                <div  id="officialTweets">
+                </div>
+            </div>
+        </section>
+        <section class="personal non-selectable bigheader" ondragstart="return false">
+            PERSONAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox1" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
+            <div class="scrollBox">
+                <div id="userTweets" class="usertweets">
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script>
+        block('#officialTweets').tweets({
+            memory:100
+        });
+        events.connect('official', '#officialTweets');
+    </script>
+    <script>
+        block('#userTweets').tweets({
+            memory:100
+        });
+        events.connect('regular', '#userTweets');
+    </script>
+    
+    <script>
+        block('#graph').rolling_chart({
+            memory: 150,
+            chart: {
+                yaxis:{
+                    min: -10,
+                    max: 40
+                },
+                xaxis: {
+                    show:false
+                }
+            }
+        });
+        events.connect('sample', '#graph');
+        </script>
+    <script>
+        block('#searchForm').form({
+            target: '/api/search'
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

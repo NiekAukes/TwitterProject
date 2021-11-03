@@ -1,0 +1,94 @@
+/*  columns:    33.33% 66.67%
+    rows:       50% 16.67% 33.33%
+*/
+body{
+    color:#FFFFFF;
+}
+.header {
+    text-align: center;
+}
+.Title_wrapper {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    z-index: 1;
+}
+.Title_Icon {
+    height:auto;
+    width:100%;
+    max-height: 100px;
+    max-width:420px;
+    vertical-align:middle;
+    margin: 5% 0% 0% 5%;
+}
+.dashboard_title_wrapper {
+    display: block;
+    grid-column: 1 / 4;
+    grid-row: 1/2;
+}
+.dashboard_title {
+    vertical-align: top;
+    z-index: 0;
+    text-align: center;
+    vertical-align:middle;
+    padding-top: 10px;
+    font-size: 60px;
+    font-weight:500;
+    margin: 1.25% 0% 0% 5%;
+}
+
+/* Tweets stuff */
+.tweetarea_wrapper {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+
+    display:grid;
+    grid-template-columns: 1fr 5px 1fr;
+    grid-template-rows: 12.5% 7.5% 72.5%;
+    grid-gap:10px;
+}
+.searchbar_tweetarea_wrapper {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    width:100%;
+    min-width:100%;
+    padding-left:5%;
+}
+.searchbar_tweetarea {
+    line-height:52px;
+    width:100%;
+    margin-left:-5%;
+    text-align: center;
+}
+.tweetsareaprefab{ 
+    background:#6e6e6e;
+    border:#EEE 2px solid;
+    border-radius: 4px;
+    padding:5px 10px;
+}
+
+.officialtweetsheader{
+    grid-column: 1/2;
+    grid-row:2/3;
+}
+.officialtweetsarea {
+    grid-column: 1/2;
+    grid-row:3/4;
+    
+}
+
+.usertweetsheader{
+    grid-column: 3/4;
+    grid-row:2/3;
+}
+.usertweetsarea {
+    grid-column: 3/4;
+    grid-row:3/4;
+}
+.SPACER {
+    grid-column:2/3;
+    grid-row:2/4;
+    width:100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}

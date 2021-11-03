@@ -1,0 +1,297 @@
+body { 
+  min-height:768;
+  min-width: 1366; /*Make minimum window size 768x1366, just big enough to not break the site
+                    it's small enough that most people can still use it, further decreasing window size would require scaling text and adjusting all sizes.*/
+  margin: 0;
+  height: 100vh;
+  max-height: 100%;
+  background: #1b2836;
+  color:#ffffff;
+  overflow-y: hidden;
+  font-family: 'Segoe UI','Arial';
+  font-size: xx-large;
+}
+/* Basic style & theme*/
+
+/*"Twitter night mode theme"
+"primary_color": "#243447",     (DARK BLUE)
+"accent_color": "#243447", 
+"highlight_color": "#5b8fb4",   (LIGHT BLUE)
+"primary_text_color": "#ffffff", (WHITE)
+"secondary_text_color": "#8d8d8d", (LIGHT GREY)
+"window_color": "#1b2836", (DARK PASTEL BLUE-ISH)
+"content_color": "#1b2836"*/
+
+
+/*Color Scheme
+
+071C21
+1D3E53
+254B62
+476D7C
+77ABB7
+
+*/
+.bigheader {
+  font-size:20px;
+}
+.non-selectable {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 3fr 3fr 0.75fr;
+  height: 100vh;
+  margin: 1em;
+  grid-gap: 10px;
+  max-height: 100%;
+  grid-template-areas: "header header search"
+                       "alert official personal"
+                       "conditions official personal"
+                       "conditions official personal"
+  ;
+}
+
+section.header {
+  /*grid-column: 1/3;
+  grid-row: 1/2;*/
+  grid-area: header;
+  background: transparent;
+  user-select: none;
+  -webkit-user-drag: none ;
+}
+
+section.search {
+  /*grid-column: 3/4;
+  grid-row: 1/2;*/
+  grid-area: search;
+  background: transparent;
+  margin-top: 5%;
+}
+
+section.alert {
+  grid-area: alert;
+  border-radius: 10px;
+  padding: 10px;
+  background: #243447;
+  text-align: center;
+}
+
+section.conditions {
+  grid-area: conditions;
+  border-radius: 10px;
+  padding: 10px;
+  background: #243447;
+  text-align: center;
+}
+.CurrentWeather{
+  width:100%;
+  min-height:22.5%;
+  max-height:22.5%;
+  background-color: transparent;
+}
+.currWeatherItem{
+  background-color: transparent;
+  font-size:larger;
+  font-weight:normal;
+}
+.WeatherConditionImage{
+  float:left;
+  width:25%;
+  margin-top:-7.5%; margin-right:-2.5%;
+}
+.currTemp_weatherCondDescr{
+  text-align: left;
+  float:left;
+  padding-top:3%;
+}
+.location{
+  text-align: right;
+  float:left;
+  vertical-align: bottom;
+  padding-top: 4%; margin-left:10px;
+  font-size:smaller;
+  font-weight:600;
+  color:#bebebe;
+}
+#graph{
+  height: 100%;
+  vertical-align: bottom;
+}
+.weatherGraphHeader{
+  float:left;
+  height:10%;
+  margin-top:-4%;
+  padding-left:10px;
+}
+.currWeatherWeatherGraphContainer{
+  margin-top:5%;
+  height:62.5%;
+  vertical-align: bottom;
+}
+
+
+section.official {
+  grid-area: official;
+  border-radius: 10px;
+  padding: 10px;
+  background: #243447;
+  text-align: center;
+}
+section.official > div, section.personal > div{ /* SCROLLBOX DIV FOR OFFICIAL TWEETS AND USER TWEETS */
+  min-height: 90%;
+  max-height: 90%;
+  min-width: 100%;
+  max-width: 100%;
+  margin-left:-1%;
+  vertical-align: top;
+}
+
+section.personal {
+  /*grid-column: 3/4;
+  grid-row: 2/4;*/
+  grid-area: personal;
+  border-radius: 10px;
+  padding: 10px;
+  /*background-color: #1D3E53;*/
+  background: #243447;
+  text-align: center;
+}
+
+
+form.tweet_search>button,form.tweet_search>input{
+  color: #ffffff;
+  /*float:right;*/
+  max-width:300px;
+  display: inline-block;
+  
+}
+
+form.tweet_search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: right;
+  width: 120%;
+  background: #212121;
+}
+
+/*form.tweet_search input {
+  float: right;
+}*/
+/*form.tweet_search {
+  float: right;
+}*/
+
+form.tweet_search button {
+  float: right;
+  width: 60px;
+  padding: 10px;
+  background: #2BA7DF; /*was 2196F3*/
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-right: none;
+  cursor: pointer;
+  /*align-content: flex-end*/
+}
+
+form.tweet_search button:hover {
+  background: #2BA7DF; /*was 0b7dda*/
+}
+
+form.tweet_search input:hover {
+  background: #444444;
+}
+
+form.tweet_search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.splash {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #212121; /*was black*/
+  z-index: 200;
+  align-self: center;
+  line-height: 120vh;
+}
+
+.splash.display-none {
+  position:fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #212121; /*was black*/
+  z-index: -10;
+  align-self: center;
+  line-height: 120vh;
+}
+
+.image {
+  text-align: center;
+}
+
+@keyframes fadeOut{
+  to{
+    opacity: 0;
+  }
+}
+
+.fade-out{
+  opacity: 1;
+  animation: fadeOut 1s forwards 1s;
+}
+
+
+/* Box styles */
+.scrollBox {
+  border: none;
+  padding: 5px;
+  font: 24px/36px sans-serif;
+  width: 100%;
+  max-height: 90%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  }
+  
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+  background: #1b2836;
+  border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #ccc;  
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+  background: #999;  
+  }
+
+
+/*"Twitter night mode theme"   
+"primary_color": "#243447", 
+"accent_color": "#243447", 
+"highlight_color": "#5b8fb4", 
+"primary_text_color": "#ffffff", 
+"secondary_text_color": "#8d8d8d", 
+"window_color": "#1b2836", 
+"content_color": "#1b2836"*/
