@@ -3,11 +3,10 @@ import Classifier
 
 Classifier.OfficialTweets
 
-ret = {}
-
 def Extract(Tweet):
-    Tweet = 'has_{} 1' .format(Tweet)
+    newlist = []
     ret = {}
+    Tweet = 'has_{} 1' .format(Tweet)
     Humidity = Tweet.find("Hum")
     Time = Tweet.find("-T")
     Wind = Tweet.find("wind")
@@ -21,8 +20,14 @@ def Extract(Tweet):
     #Time 
     if Time == -1:
         return None
-    else:
-        ret['Time'] = Tweet[14:22]     
+    elif Tweet[Date + 13] == "'":
+        i = 1
+        tempT = []
+        for i in range(8):
+            tempT.append(Tweet[Date + 25 + i])
+            i += 1
+        z = ''.join(tempT)
+        ret['Time'] = z
     #Humidity in percentage
     if Humidity == -1:
         return None
@@ -93,14 +98,20 @@ def Extract(Tweet):
         ret['location'] = j
     return ret
 
+def AllTweets(Tweet):
+    for i in range(len(Tweet)):
+        print(Extract(Classifier.OfficialTweets[i]))
+
 
 #test
 if __name__ == "__main__":
-    print(Classifier.OfficialTweets[0])
-    print(Extract(Classifier.OfficialTweets[0]))
-    print(Extract(Classifier.OfficialTweets[2]))
-    print("-----------------------")
-    print("-----------------------")
+
+    print(Classifier.OfficialTweets[400])
+    print(Extract(Classifier.OfficialTweets[400]))
+    #print(Classifier.OfficialTweets[0])
+    #print(Extract(Classifier.OfficialTweets[0]))
+    #print("-----------------------")
+    #print("-----------------------")
     #print(ret)
 
 
