@@ -56,10 +56,9 @@ def tweet(ctx, e):
    #print(tweet['user']['name'])
    emit('regular', tweet)
 
-@event('weather_update_rawtext_update')
-def updateRawText(context  ,e):  
-       pass
 
+
+#for updating graph
 @event('weather_update_graph_update')
 def updateGraph(context,e):
    emit('sample',{
@@ -67,6 +66,7 @@ def updateGraph(context,e):
     'value': sample
    })
 
+#for making search functionality work, in progress
 @event('search')
 def searchbtn(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
    pass
