@@ -19,8 +19,23 @@ block.fn.weather = function(config) {
         var $currtemp = $base.find("#currtemp");
         var $location = $base.find("#location");
         //var $content = $('<p>testtesttest</p>');
+        var imgurl = ""
+        switch (tweet.Condition) {
+            case "Sunny":
+                imgurl = "Assets/WeatherCond/animated/day.svg"
+                break;
+            case "Cloudy":
+                imgurl = "Assets/WeatherCond/animated/cloudy-day-1.svg"
+                break;
+            case "Rain":
+                imgurl = "Assets/WeatherCond/animated/rainy-1.svg"
+                break;
+        }
+        $img.attr("src", imgurl);
+        $currtemp.html($(tweet.temperature + "°C, " + tweet.Condition));
 
-        //algorithm to deduce 
+        $location.html($("Emmen"));
+        //algorithm to deduce conditions
         
 /*
         var $tweet = $('<div class="tweet"></div>');
