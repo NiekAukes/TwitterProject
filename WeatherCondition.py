@@ -5,8 +5,9 @@ Classifier.OfficialTweets
 
 
 
-def Extract(Tweet):
-    Tweet = 'has_{} 1' .format(Tweet)
+def Extract(origTweet):
+
+    Tweet = 'has_{} 1' .format(origTweet)
     ret = {}
     Humidity = Tweet.find("Hum")
     Time = Tweet.find("-T")
@@ -22,7 +23,8 @@ def Extract(Tweet):
     if Time == -1:
         return None
     else:
-        ret['Time'] = Tweet[14:22]     
+        splittime = origTweet['created_at'].split()
+        ret['Time'] = splittime[0:len(splittime)-2]
     #Humidity in percentage
     if Humidity == -1:
         return None

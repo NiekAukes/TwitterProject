@@ -44,7 +44,7 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 3fr 3fr 3fr 0.75fr;
+  grid-template-rows: 1fr 2fr 7fr 0.75fr;
   height: 100vh;
   margin: 1em;
   grid-gap: 10px;
@@ -52,13 +52,10 @@ body {
   grid-template-areas: "header header search"
                        "alert official personal"
                        "conditions official personal"
-                       "conditions official personal"
   ;
 }
 
 section.header {
-  /*grid-column: 1/3;
-  grid-row: 1/2;*/
   grid-area: header;
   background: transparent;
   user-select: none;
@@ -66,8 +63,6 @@ section.header {
 }
 
 section.search {
-  /*grid-column: 3/4;
-  grid-row: 1/2;*/
   grid-area: search;
   background: transparent;
   margin-top: 5%;
@@ -79,6 +74,35 @@ section.alert {
   padding: 10px;
   background: #243447;
   text-align: center;
+
+  display:block;
+
+}
+.alertheader{
+  height:35%;
+}
+.alertWrapper{
+  margin-top:1%;
+  display:inline-block;
+  height:65%;
+  width:100%;
+  margin-left:7%;
+}
+.alertIcon{
+  height:5vh;
+  width:auto;
+  float:left;
+  opacity:1;
+  transition: 0.5s ease-out;
+}
+.alertIcon.fade{
+  opacity:0;
+}
+.alertText{
+  float:left;
+  vertical-align: middle;
+  margin-top:1vh;
+  margin-left:10px;
 }
 
 section.conditions {
@@ -92,8 +116,18 @@ section.conditions {
   width:100%;
   min-height:22.5%;
   max-height:22.5%;
+  margin-top:5%;
   background-color: transparent;
+  display:flex;
 }
+.extraWeatherStats{
+  height: 50%;
+  position:fixed;
+  text-align: right;
+  margin-top:2.5%;
+  margin-left:5%;
+}
+
 .currWeatherItem{
   background-color: transparent;
   font-size:larger;
@@ -102,6 +136,7 @@ section.conditions {
 .WeatherConditionImage{
   float:left;
   width:25%;
+  height:fit-content;
   margin-top:-7.5%; margin-right:-2.5%;
 }
 .currTemp_weatherCondDescr{
@@ -109,14 +144,22 @@ section.conditions {
   float:left;
   padding-top:3%;
 }
-.location{
-  text-align: right;
-  float:left;
-  vertical-align: bottom;
-  padding-top: 4%; margin-left:10px;
+.location, .currtime, .extraWeatherStats > div {
   font-size:smaller;
   font-weight:600;
   color:#bebebe;
+}
+.location , .currtime{
+  text-align: right;
+  vertical-align: bottom;
+  padding-top: 4%; margin-left:10px;
+}
+.location{
+  float:left;
+}
+.currtime {
+  float:right;
+  margin-right: 2.5%;
 }
 
 .weatherGraphHeader{
@@ -149,12 +192,9 @@ section.official > div, section.personal > div{ /* SCROLLBOX DIV FOR OFFICIAL TW
 }
 
 section.personal {
-  /*grid-column: 3/4;
-  grid-row: 2/4;*/
   grid-area: personal;
   border-radius: 10px;
   padding: 10px;
-  /*background-color: #1D3E53;*/
   background: #243447;
   text-align: center;
 }
@@ -162,7 +202,6 @@ section.personal {
 
 form.tweet_search>button,form.tweet_search>input{
   color: #ffffff;
-  /*float:right;*/
   max-width:300px;
   display: inline-block;
   
@@ -177,13 +216,6 @@ form.tweet_search input[type=text] {
   background: #212121;
 }
 
-/*form.tweet_search input {
-  float: right;
-}*/
-/*form.tweet_search {
-  float: right;
-}*/
-
 form.tweet_search button {
   float: right;
   width: 60px;
@@ -194,7 +226,6 @@ form.tweet_search button {
   border: 1px solid grey;
   border-right: none;
   cursor: pointer;
-  /*align-content: flex-end*/
 }
 
 form.tweet_search button:hover {
