@@ -18,7 +18,14 @@
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
     <script src="/lib/tweets.js"></script> 
-    
+    <script src="/lib/form.js"></script> 
+    <script>
+        window.post = function(url, data) {
+  return fetch(url, {method: "POST", body: JSON.stringify(data)});
+}
+
+    post("api/cache", {});
+    </script>
 </head>
 <body>
     <div class="splash image fade-out">
@@ -30,10 +37,10 @@
             <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
-            <div>
-                <form class="tweet_search" id="searchForm"><!--action="/.../"-->
-                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
-                    <input type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
+            <div id="searchForm">
+                <form class="tweet_search" ><!--action="/.../"-->
+                    <input placeholder="Search for..." name="searchtext" style="border-radius: 5px;"/>
+                    <button type="submit" value="search" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
                 </form>
             </div>
         </section>

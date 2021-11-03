@@ -3,6 +3,8 @@ import time
 from datetime import datetime
 from eca.generators import *
 import json
+import ctypes
+import TWeather
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
 def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
