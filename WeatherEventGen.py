@@ -10,8 +10,8 @@ import TWeather
 import Classifier
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
-def supertweetgen(data, timescale=1000, begintime="Mon Oct 31 15:55:54 +0000 2011", classifier_threshold = 2):
-
+def supertweetgen(data, timescale=1000, loop=True, begintime="Mon Oct 31 15:55:54 +0000 2011", classifier_threshold = 2):
+    
     officialcatchuptweets = []
     regularcatchuptweets = []
     last_time = datetime.strptime(begintime, '%a %b %d %H:%M:%S %z %Y')
@@ -51,6 +51,9 @@ def supertweetgen(data, timescale=1000, begintime="Mon Oct 31 15:55:54 +0000 201
     if len(regularcatchuptweets) > 0:
         fire_global("chirpregular", regularcatchuptweets)
         regularcatchuptweets = []
+    if (loop):
+        supertweetgen(data, timescale=1000, loop=True, begintime="Mon Oct 31 15:55:54 +0000 2011", classifier_threshold = 2)
+        #repeat it
 
 
 
