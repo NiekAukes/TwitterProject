@@ -108,7 +108,11 @@
         });
         events.connect('sample', '#graph');
         </script>
-    
+    <script>
+        block('#searchForm').form({
+            target: '/api/search'
+        });
+    </script>
     <script src="app.js"></script>
 </body>
 </html>

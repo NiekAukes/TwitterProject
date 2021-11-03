@@ -1,4 +1,5 @@
 from eca import *
+import eca.http
 
 from eca.generators import start_offline_tweets
 import datetime
@@ -6,6 +7,10 @@ import textwrap
 from WeatherEventGen import *
 import Classifier
 import WeatherCondition
+
+#Adding a handler for the search button press.
+def add_request_handlers(httpd):
+    httpd.add_route('/api/search', eca.http.GenerateEvent('search'), methods=['POST'])
 
 @event('init')
 def setup(ctx, e):
@@ -61,3 +66,7 @@ def updateGraph(context,e):
     'action': 'add',
     'value': sample
    })
+
+@event('search')
+def searchbtn(context,e): #WHEN USER WANTS TO SEARCH, DECODE MSG
+   pass
