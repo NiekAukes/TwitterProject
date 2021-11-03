@@ -8,23 +8,53 @@ from WeatherEventGen import *
 import Classifier
 import WeatherCondition
 
+def isintweet(tweet, criteria):
+   text = tweet['text']
+   if any(x in text for x in criteria):
+      return True
+   return False
+
 def Search(json):
    return (Classifier.OfficialTweets[:10], Classifier.RegularTweets[:10])
 
-searching = False
+search = ""
+
+cachedOfficialTweets = []
+cachedRegularTweets = []
+
+
 #Adding a handler for the search button press.
 def add_request_handlers(httpd):
-    httpd.add_route('/api/search', eca.http.GenerateEvent('search'), methods=['POST'])
+    httpd.add_route('/api/search', eca.http.GenerateEvent('Search'), methods=['POST'])
+    httpd.add_route('/api/cache', eca.http.GenerateEvent('rqcache'), methods=['POST'])
+
 
 @event("Search")
 def rqSearch(ctx, e):
-   sret = Search(e)
-   sig_regulartweets = False
-   sig_officialtweets = False
 
-   print(id(sig_officialtweets))
-   start_tweets(sret[0], time_factor=100, event_name='chirpofficial')
-   start_tweets(sret[1], time_factor=100, event_name='chirpregular')
+   sret = Search(e)
+   print(e.data)
+   global search 
+   search = e.data['searchtext']
+
+   rqCache(ctx, e)
+
+@event("rqcache")
+def rqCache(ctx, e):
+   print("cache requested")
+   global search
+   for tweet in cachedOfficialTweets:
+      print("off")
+      if search != "":
+         if not isintweet(tweet, search.split()):
+            continue
+      emit('official', tweet)
+   for tweet in cachedRegularTweets:
+      print("reg")
+      if search != "":
+         if not isintweet(tweet, search.split()):
+            continue
+      emit('regular', tweet)
 
 @event('init')
 def setup(ctx, e):
@@ -33,8 +63,16 @@ def setup(ctx, e):
    
    #tweetonce(Classifier.OfficialTweets[0])
 
+def postTweet(tweet, channel):
+   global search
+   if search != "":
+      if not isintweet(tweet, search.split()):
+         return
+   
+   emit(channel, tweet)
+
+
 @event('chirpofficial')
-@condition("")
 def tweet(ctx, e):
    # we receive a tweet
    tweet = e.data
@@ -42,12 +80,16 @@ def tweet(ctx, e):
    #I've been able to locate the user image urls, because I couldn't stand the 'image not found' icon on every tweet. -Douwe Osinga
    #class of tweet is dict, so try to change the value of the image keys to the default twitter user image.
    tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-   tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
+   tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
+   if (len(cachedOfficialTweets) > 5000):
+      cachedOfficialTweets.pop()
+   cachedOfficialTweets.insert(0, tweet)
 
-   # generate output
-   #print(tweet['user']['name']
-   fire("Search", {"a":"t"})
-   # )
+   global search
+   if search != "":
+      if not isintweet(tweet, search.split()):
+         return
+
    emit('official', tweet)
    emit("weather", tweet)
 
@@ -61,16 +103,15 @@ def tweet(ctx, e):
    tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
    tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
 
-   # parse date (NOT USED RIGHT NOW)
-   #time = datetime.datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
-   
-   # nicify text (NOT USED RIGHT NOW)
-   #text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
-   
-   #update the weather graph based on location data.
-   
-   # generate output
-   #print(tweet['user']['name'])
+   if (len(cachedRegularTweets) > 5000):
+      cachedRegularTweets.pop()
+   cachedRegularTweets.insert(0, tweet)
+
+   global search
+   if search != "":
+      if not isintweet(tweet, search.split()):
+         return
+
    emit('regular', tweet)
 
 
