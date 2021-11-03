@@ -45,7 +45,7 @@ def tweetIsAboutWeather_Certainty(tweet):
                 score += 1
                 #DEBUG: print("found "+wordsstring[i:i+len(keyword)])
     
-    if(score > CERTAINTYTHRESHOLD):print("TWEET: "+tweet['text']+" HASHTAGS: "+str(hastaglist)+",SCORE :"+ str(score))
+    #if(score > CERTAINTYTHRESHOLD):print("TWEET: "+tweet['text']+" HASHTAGS: "+str(hastaglist)+",SCORE :"+ str(score))
     return score
 
 
@@ -68,7 +68,7 @@ OfficialTweets = SeperateTweets(data)
 RegularTweets = OfficialTweets[1]
 OfficialTweets = OfficialTweets[0]
 
-print(*[x['text']+"\n" for x in RegularTweets])
+#print(*[x['text']+"\n" for x in RegularTweets])
 
 if __name__ == "__main__":
     print(SeperateTweets(data)[0][0]['user']['screen_name'])

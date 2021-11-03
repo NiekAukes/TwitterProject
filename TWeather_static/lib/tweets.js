@@ -80,7 +80,7 @@ block.fn.tweets = function(config) {
 
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
-        
+        console.debug(tweet);
         if (jQuery.isEmptyObject(tweet)) {
             
             while ($list.children().length > 0) {
@@ -92,7 +92,7 @@ block.fn.tweets = function(config) {
         if (tweet.constructor.name != "Array") {
             tweet = [tweet];
         }
-        console.debug(tweet);
+        
         var i = tweet.length > options.memory ? tweet.length - options.memory : 0
         for (; i < tweet.length; i++) {
             tweetiter = tweet[i];

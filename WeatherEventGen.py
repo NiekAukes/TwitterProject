@@ -37,7 +37,6 @@ def supertweetgen(data, timescale=1000, begintime="Mon Oct 31 15:55:54 +0000 201
             delay = wait.total_seconds() / timescale
 
             last_time = tweet_time
-
             time.sleep(delay)
             if Classifier.isofficial(tweet):
                 fire_global("chirpofficial", tweet)
