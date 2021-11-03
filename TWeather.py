@@ -33,7 +33,8 @@ def tweet(ctx, e):
    tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
 
    # generate output
-   #print(tweet['user']['name'])
+   print(tweet['user']['name'])
+   print(tweet['text'])
    emit('official', tweet)
    weatherCond = (WeatherCondition.Extract(tweet))
    print(weatherCond['Temperature'])
