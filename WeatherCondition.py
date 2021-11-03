@@ -69,11 +69,17 @@ def Extract(Tweet):
             i += 1
         x = ''.join(temp1)
         ret['Temperature'] = x
-    #Date, Created At
+    #Date, Created At [439:449]
     if Date == -1:
         return None
-    else:
-        ret['Date'] = Tweet[439:449]
+    elif Tweet[Date + 13] == "'":
+        i = 1
+        temp = []
+        for j in range(10,):
+            temp.append(Tweet[Date + 14 + j])
+            i += 1
+        k = ''.join(temp)
+        ret['Date'] = k
     #location
     if location == -1:
         return None
@@ -92,7 +98,7 @@ def Extract(Tweet):
 if __name__ == "__main__":
     print(Classifier.OfficialTweets[0])
     print(Extract(Classifier.OfficialTweets[0]))
-    print(Extract(Classifier.OfficialTweets[1]))
+    print(Extract(Classifier.OfficialTweets[200]))
     print("-----------------------")
     print("-----------------------")
     #print(ret)
