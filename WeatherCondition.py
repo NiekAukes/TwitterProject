@@ -3,9 +3,11 @@ import Classifier
 
 Classifier.OfficialTweets
 
-ret = {}
+ret ={}
 
 def Extract(Tweet):
+    Tweet = 'has_{} 1' .format(Tweet)
+    ret = {}
     Humidity = Tweet.find("Hum")
     Time = Tweet.find("-T")
     Wind = Tweet.find("wind")
@@ -59,8 +61,14 @@ def Extract(Tweet):
     #Temperature
     if Temp == -1:
         return None
-    else:
-        ret['Temp'] = Tweet[Time + 4] + Tweet[Time + 5] + Tweet[Time + 6]
+    elif Tweet[Temp + 2] == ".":
+        i = 1
+        temp1 = []
+        while Tweet[Temp + 2 + i] != "º":
+            temp1.append(Tweet[Temp + 2 + i])
+            i += 1
+        x = ''.join(temp1)
+        ret['Temperature'] = x
     #Date, Created At
     if Date == -1:
         return None
@@ -71,58 +79,30 @@ def Extract(Tweet):
         return None
     elif Tweet[location + 12] == "'":
         i = 1
-        temp = []
+        temp2 = []
         while Tweet[location + 12 + i] != "'":
-            temp.append(Tweet[location + 12 + i])
+            temp2.append(Tweet[location + 12 + i])
             i += 1
-        j = ''.join(temp)
+        j = ''.join(temp2)
         ret['location'] = j
-   
     return ret
-    
-
-def SearchTweet(Tweet, ret):
-    while True:
-        try:
-            # Note: Python 2.x users should use raw_input, the equivalent of 3.x's input
-            Item = input("Search by: ")
-        except ValueError:
-            print("Sorry, I didn't understand that.")
-            #better try again... Return to the start of the loop
-            continue
-        else:
-            #age was successfully parsed!
-            #we're ready to exit the loop.
-            break
-    if Item.lower == "time" or Item.lower == "humidity" or Item.lower == "wind" or Item.lower == "wind direction"  or Item.lower == "air pressure"  or Item.lower == "air pressure"  or Item.lower == "rain" or Item.lower == "uv" or Item.lower == "temperature" or Item.lower == "date"  or Item.lower == "location":
-        print("valid")
-    else:
-        False
-
-
-
-    
-    
-
-
 
 
 #test
 if __name__ == "__main__":
-    x = ['has_{} 1'.format(d) for d in Classifier.OfficialTweets]
-   # print(Classifier.OfficialTweets[0])
+    print(Classifier.OfficialTweets[0])
+    print(Extract(Classifier.OfficialTweets[0]))
+    print(Extract(Classifier.OfficialTweets[1]))
     print("-----------------------")
     print("-----------------------")
-    #Extract(x[0])
     #print(ret)
-    SearchTweet(x, ret)
 
 
 
 
 
 
- #if Item.lower == "time" or Item.lower == "humidity" or Item.lower == "wind" or Item.lower == "wind direction"  or Item.lower == "air pressure"  or Item.lower == "air pressure"  or Item.lower == "rain" or Item.lower == "uv" or Item.lower == "temperature" or Item.lower == "date"  or Item.lower == "location":   
+ 
    
 
 
