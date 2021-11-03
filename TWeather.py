@@ -1,5 +1,5 @@
-from eca import *
-import eca.http
+from eca.eca import *
+import eca.http as http
 
 from eca.generators import start_offline_tweets
 import datetime
@@ -7,10 +7,16 @@ import textwrap
 from WeatherEventGen import *
 import Classifier
 import WeatherCondition
+import Networking
+
 
 #Adding a handler for the search button press.
 def add_request_handlers(httpd):
-    httpd.add_route('/api/search', eca.http.GenerateEvent('search'), methods=['POST'])
+    httpd.add_route('/api/search', http.GenerateEvent("search"), methods=['POST'])
+
+@event('requestcache')
+def rqcache(ctx, e):
+   print("request made")
 
 @event('init')
 def setup(ctx, e):

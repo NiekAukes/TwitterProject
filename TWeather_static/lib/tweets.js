@@ -80,6 +80,13 @@ block.fn.tweets = function(config) {
 
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
+        
+        if (tweet === {}) {
+            while ($list.children().length > 0) {
+                $list.children().last().remove();
+            }
+            return;
+        }
         var $item = $('<li class="stream-item"></li>');
 
         var $tweet = $('<div class="tweet"></div>');
