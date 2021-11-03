@@ -25,6 +25,7 @@ def tweet(ctx, e):
    tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
 
    # generate output
+   #print(tweet['user']['name'])
    emit('official', tweet)
    emit("weather", tweet)
 
@@ -47,10 +48,11 @@ def tweet(ctx, e):
    #update the weather graph based on location data.
    
    # generate output
+   #print(tweet['user']['name'])
    emit('regular', tweet)
 
 @event('weather_update_rawtext_update')
-def updateRawText(context  ,e):
+def updateRawText(context  ,e):  
        pass
 
 @event('weather_update_graph_update')
