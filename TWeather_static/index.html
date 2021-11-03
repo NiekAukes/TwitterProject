@@ -20,6 +20,7 @@
     <script src="lib/form.js"></script>
     <script src="/lib/tweets.js"></script> 
     <script src="/lib/form.js"></script> 
+    <script src="/lib/weather.js"></script> 
     <script>
         window.post = function(url, data) {
   return fetch(url, {method: "POST", body: JSON.stringify(data)});
@@ -45,20 +46,31 @@
                 </form>
             </div>
         </section>
-        <section class="alert non-selectable bigheader" ondragstart="return false">
-            WEATHER ALERT
+        <section class="alert" ondragstart="return false">
+            <div class="alertheader non-selectable bigheader">WEATHER ALERT</div>
+            <div class="alertWrapper">
+                <img id="alertIcon" class="alertIcon non-selectable" ondragstart="return false" src="Assets/Circles/svg/GreenCircle.svg">
+                <div id="alertText" class="alertText">Testtext</div>
+                
+            </div>
         </section>
         <section class="conditions non-selectable bigheader" ondragstart="return false">
             WEATHER CONDITIONS
             <div class="CurrentWeather" id="weather">
-                <img src="Assets/WeatherCond/animated/cloudy-day-1.svg" class="WeatherConditionImage currWeatherItem" id="weatherimage">
-                <div class="currTemp_weatherCondDescr currWeatherItem" id="currtemp">xx°C, Cloudy</div>
-                <div class="location currWeatherItem" id="location">Enschede</div>
+                    <img src="Assets/WeatherCond/animated/cloudy-day-1.svg" class="WeatherConditionImage currWeatherItem" id="weatherimage">
+                    <div class="currTemp_weatherCondDescr currWeatherItem" id="currtemp">xx°C, Cloudy</div>
+                    <div class="location currWeatherItem" id="location">Enschede</div>
+                    <div class="currtime currWeatherItem" id="currtime">timeplaceholder</div>
+                
+                <div class="extraWeatherStats" id="extraWeatherStats" style="vertical-align: bottom;">
+                    <div class="humidity" id="humidity">Humidity: </div>
+                    <div class="wind_spd" id="wind_spd">Wind speed: </div>
+                    <div class="air_press" id="air_press">Air pressure: </div>
+                </div>
             </div>
             <div class="currWeatherWeatherGraphContainer">
                 <div class="weatherGraphHeader bigheader non-selectable" ondragstart="return false">Weather graph</div>
-                <div id="graph">
-                    
+                <div id="graph" style="min-height:100px;height:100%;">
                 </div>
             </div>
             
@@ -86,7 +98,7 @@
                 </div>
             </div>
         </section>
-
+        
     </div>
     <script>
         block('#officialTweets').tweets({
@@ -123,6 +135,12 @@
             callback: function() {
             $('#location').val('');}  
         });
+    </script>
+    <script>
+        block('#weather').weather({
+
+        })
+        events.connect('updateWeatherStats','#weather')
     </script>
     <script src="app.js"></script>
 </body>

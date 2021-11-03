@@ -113,14 +113,19 @@ def tweet(ctx, e):
          return
    emit('official', tweetls)
    # generate output
+   emit('official', tweet)
+
+   #retrieve weatherconditions from the tweets
    weatherCond = (WeatherCondition.Extract(tweetls[-1]))
 
+   #update the graph
    emit('updateGraph',{
     'action': 'add',
     'value': {
-       'Time':1,#weatherCond['Time'],
-       'Temp':weatherCond['Temperature']}
+       'series0':1,#weatherCond['Time'],
+       'series1':weatherCond['Temperature']}
    })
+   emit('updateWeatherStats',weatherCond)
 
 
 @event('chirpregular')

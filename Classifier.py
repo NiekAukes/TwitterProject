@@ -44,7 +44,7 @@ def tweetIsAboutWeather_Certainty(tweet):
             if(wordsstring[i:i+len(keyword)] == keyword):
                 score += 1
                 #DEBUG: print("found "+wordsstring[i:i+len(keyword)])
-    
+    #DEBUG:
     #if(score > CERTAINTYTHRESHOLD):print("TWEET: "+tweet['text']+" HASHTAGS: "+str(hastaglist)+",SCORE :"+ str(score))
     return score
 
@@ -68,6 +68,7 @@ OfficialTweets = SeperateTweets(data)
 RegularTweets = OfficialTweets[1]
 OfficialTweets = OfficialTweets[0]
 
+#DEBUG
 #print(*[x['text']+"\n" for x in RegularTweets])
 
 if __name__ == "__main__":
