@@ -18,11 +18,17 @@ def SearchTweet(x):
         
 def test(Tweet):
     newret = dict()
+<<<<<<< Updated upstream
     search = input("Search words: ")
     for (key, value) in Tweet.items():
         print("hello")
         if key == search:
             print(key)
+=======
+    #search = input("Search words: ")
+    for (key, value) in Tweet.items():
+        print("hello")
+>>>>>>> Stashed changes
     
     
 
@@ -35,6 +41,7 @@ if __name__ == "__main__":
 
 
 
+<<<<<<< Updated upstream
 
 
 
@@ -46,3 +53,5 @@ if __name__ == "__main__":
     
     
 
+=======
+>>>>>>> Stashed changes
