@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
 <html lang="en">
-    
       
 <head>
     <title>TWeather</title>
@@ -19,7 +18,6 @@
     <script src="/lib/charts.js"></script>
     <script src="/lib/log.js"></script> 
     <script src="/lib/tweets.js"></script> 
-    <script src="/lib/weather.js"></script> 
     
 </head>
 <body>
@@ -49,7 +47,7 @@
                 <div class="currTemp_weatherCondDescr currWeatherItem">xx°C, Cloudy</div>
                 <div class="location currWeatherItem">Enschede</div>
             </div>
-            <div class="WeatherGraph">
+            <div id="graph" class="currWeatherWeatherGraph">
                 GIMME GRAPH PLS
             </div>
             
@@ -78,7 +76,6 @@
         </section>
         <section class="graphs non-selectable bigheader" ondragstart="return false">
             WEATHER GRAPHS
-            <div id="test"></div>
         </section>
 
     </div>
@@ -86,28 +83,10 @@
         block('#officialTweets').tweets({
             memory:500
         });
-        
         events.connect('official', '#officialTweets');
     </script>
-
-<script>
-    //block("#test").weather();
-    //events.connect('weather', '#test')
-</script>
     <script>
-        block('#userTweets').tweets({
-            memory:500
-        });
-        
-        events.connect('regular', '#userTweets');
-    </script>
-
-<script>
-    //block("#test").weather();
-    //events.connect('weather', '#test')
-</script>
-    <script>
-        block('#weathergraph').rolling_chart({
+        block('#graph').rolling_chart({
             memory: 150,
             chart: {
                 yaxis:{
