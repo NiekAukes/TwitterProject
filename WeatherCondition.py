@@ -3,7 +3,7 @@ import Classifier
 
 Classifier.OfficialTweets
 
-ret ={}
+ret = {}
 
 def Extract(Tweet):
     Tweet = 'has_{} 1' .format(Tweet)
@@ -98,7 +98,7 @@ def Extract(Tweet):
 if __name__ == "__main__":
     print(Classifier.OfficialTweets[0])
     print(Extract(Classifier.OfficialTweets[0]))
-    print(Extract(Classifier.OfficialTweets[200]))
+    print(Extract(Classifier.OfficialTweets[2]))
     print("-----------------------")
     print("-----------------------")
     #print(ret)
