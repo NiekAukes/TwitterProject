@@ -97,7 +97,6 @@ def tweet(ctx, e):
    # we receive a tweet
    tweetls = e.data
 
-   print("sending tweets:" + str(tweetls))
    #I've been able to locate the user image urls, because I couldn't stand the 'image not found' icon on every tweet. -Douwe Osinga
    #class of tweet is dict, so try to change the value of the image keys to the default twitter user image.
    if not isinstance(tweetls, list):
@@ -114,7 +113,7 @@ def tweet(ctx, e):
          return
    emit('official', tweetls)
    # generate output
-   weatherCond = (WeatherCondition.Extract(tweet[-1]))
+   weatherCond = (WeatherCondition.Extract(tweetls[-1]))
 
    emit('updateGraph',{
     'action': 'add',
@@ -141,8 +140,7 @@ def tweet(ctx, e):
          cachedRegularTweets.pop(0)
       cachedRegularTweets.append(tweet)
 
-      if checksearch(tweet):
-         print("returning")
+      if not checksearch(tweet):
          return
       
    emit('regular', tweetls)
