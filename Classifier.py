@@ -17,16 +17,16 @@ CERTAINTYTHRESHOLD = 1 #amount of keywords found in the message. If it exceeds t
 keywordlist = ['zomer','herfst','winter','temperatuur','barometer','mist',
                 'bliksem','dauw','droog','gladheid','gevoelstemperatuur',
                 'hagel','hemel','hPA','hittegolf','hitte','klimaat','golf','golven',
-                'nat','mist','nat','neerslag','regen','motregen','motsneeuw','nevel',
+                'nat','mist','neerslag','regen','motregen','motsneeuw','nevel',
                 'onweer','bui','sneeuw','storm','tropisch','tropen','weerbericht','wervelwind',
-                'windhoos','wolken','bries', 'zon'] #not weer because it is already filtered on that.
+                'windhoos', 'windstil','wolken','bries', 'zon'] #not weer because it is already filtered on that.
 
 def tweetIsAboutWeather_Certainty(tweet):
     score = 0
 
     #generate the word string from the tweet text
     seperatewordlist = [x.lower() for x in (tweet['text'].split())]
-    wordsstring = ''.join(seperatewordlist)
+    wordsstring = ' '.join(seperatewordlist)
 
     #extract the hashtags from the nested dictionary list (why twitter, why a nested dict list)
     hastagdictlist = tweet['entities']['hashtags']
