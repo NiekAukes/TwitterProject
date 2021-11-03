@@ -50,7 +50,7 @@ block.fn.rolling_chart = function(config) {
 
     // initial setup of library state (also builds necessary HTML)
     var plot = $.plot(this.$element, prepare_data(), options.options);
-
+    
 
     // register actions for this block
     this.actions({
