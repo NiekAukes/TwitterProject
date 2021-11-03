@@ -3,6 +3,8 @@ import time
 from datetime import datetime
 from eca.generators import *
 import json
+import ctypes
+import TWeather
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
 def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
@@ -42,6 +44,8 @@ def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
             
         wait = tweet_time - last_time 
         delay = wait.total_seconds()
+        if (TWeather.sig_officialtweets == False):
+            return
    
             # delay and yield or break depending on success
         if delayed(delay):
@@ -51,7 +55,7 @@ def custom_tweet_gen(stop, data, time_factor=1000, dateconstraint=False):
             break
 
 
-def start_tweets(data, event_name='tweet', aux_name='tweeter', **kwargs):
+def start_tweets(data, signal, event_name='tweet', aux_name='tweeter', **kwargs):
     context = get_context()
     if context is None:
         raise NotImplementedError("Can not start offline tweet replay outside of a context.")

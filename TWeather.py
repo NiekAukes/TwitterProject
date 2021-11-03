@@ -8,9 +8,23 @@ from WeatherEventGen import *
 import Classifier
 import WeatherCondition
 
+def Search(json):
+   return (Classifier.OfficialTweets[:10], Classifier.RegularTweets[:10])
+
+searching = False
 #Adding a handler for the search button press.
 def add_request_handlers(httpd):
     httpd.add_route('/api/search', eca.http.GenerateEvent('search'), methods=['POST'])
+
+@event("Search")
+def rqSearch(ctx, e):
+   sret = Search(e)
+   sig_regulartweets = False
+   sig_officialtweets = False
+
+   print(id(sig_officialtweets))
+   start_tweets(sret[0], time_factor=100, event_name='chirpofficial')
+   start_tweets(sret[1], time_factor=100, event_name='chirpregular')
 
 @event('init')
 def setup(ctx, e):
@@ -20,6 +34,7 @@ def setup(ctx, e):
    #tweetonce(Classifier.OfficialTweets[0])
 
 @event('chirpofficial')
+@condition("")
 def tweet(ctx, e):
    # we receive a tweet
    tweet = e.data
@@ -30,7 +45,9 @@ def tweet(ctx, e):
    tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
 
    # generate output
-   #print(tweet['user']['name'])
+   #print(tweet['user']['name']
+   fire("Search", {"a":"t"})
+   # )
    emit('official', tweet)
    emit("weather", tweet)
 
