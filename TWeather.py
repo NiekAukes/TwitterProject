@@ -1,4 +1,5 @@
 from eca import *
+from eca import emit
 import eca.http as http
 
 from eca.generators import start_offline_tweets
@@ -7,19 +8,28 @@ import textwrap
 from WeatherEventGen import *
 import Classifier
 import WeatherCondition
-import Networking
+from threading import Thread
 
+MAX_CACHE = 500
 
 def isintweet(tweet, criteria):
+   #get the text, in a real algorithm, run this with account name too
+
    text = tweet['text']
-   if any(x in text for x in criteria):
+   if any(x in text for x in criteria): #simple check i ripped from stackoverflow
       return True
    return False
 
-def Search(json):
-   return (Classifier.OfficialTweets[:10], Classifier.RegularTweets[:10])
-
 search = ""
+
+def checksearch(tweet):
+   global search #explicitly referencing the global variable search
+   if search != "": #check if there is anything searched
+      if isintweet(tweet, search.split()): #and run the function i just made
+         return True
+      else: return False
+   return True
+         
 
 cachedOfficialTweets = []
 cachedRegularTweets = []
@@ -39,29 +49,35 @@ def rqSearch(ctx, e):
    global search 
    search = e.data['searchtext']
 
-   rqCache(ctx, e)
+   emit('official', {}) #signal to clear the twitter feed
+   emit('regular', {})
+
+   fire("rqcache")
 
 @event("rqcache")
 def rqCache(ctx, e):
    print("cache requested")
    global search
-   for tweet in cachedOfficialTweets:
-      print("off")
-      if search != "":
-         if not isintweet(tweet, search.split()):
-            continue
-      emit('official', tweet)
-   for tweet in cachedRegularTweets:
-      print("reg")
-      if search != "":
-         if not isintweet(tweet, search.split()):
-            continue
-      emit('regular', tweet)
+
+   #repush official tweets
+   newlist = cachedOfficialTweets
+   if search != "":
+      newlist = [tweet for tweet in cachedOfficialTweets if isintweet(tweet, search.split())]
+      
+   print(len(newlist))
+   emit('official', newlist)
+   #repush regular tweets
+   newlist = cachedRegularTweets
+   if search != "":
+      newlist = [tweet for tweet in cachedRegularTweets if isintweet(tweet, search.split())]
+   emit('regular', newlist)
 
 @event('init')
 def setup(ctx, e):
-   start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
-   start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
+   #start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
+   thread = Thread(target = supertweetgen, args = (Classifier.data, 1000,))
+   thread.start()
+   #start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    
    #tweetonce(Classifier.OfficialTweets[0])
 
@@ -74,47 +90,52 @@ def postTweet(tweet, channel):
    emit(channel, tweet)
 
 
+
 @event('chirpofficial')
 def tweet(ctx, e):
    # we receive a tweet
-   tweet = e.data
+   tweetls = e.data
 
    #I've been able to locate the user image urls, because I couldn't stand the 'image not found' icon on every tweet. -Douwe Osinga
    #class of tweet is dict, so try to change the value of the image keys to the default twitter user image.
-   tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-   tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
-   if (len(cachedOfficialTweets) > 5000):
-      cachedOfficialTweets.pop()
-   cachedOfficialTweets.insert(0, tweet)
+   if not isinstance(tweetls, list):
+      tweetls = [tweetls]
 
-   global search
-   if search != "":
-      if not isintweet(tweet, search.split()):
-         return
+   for tweet in tweetls:
+      tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+      tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
+      if (len(cachedOfficialTweets) > MAX_CACHE):
+         cachedOfficialTweets.pop(0)
+      cachedOfficialTweets.append(tweet)
 
-   emit('official', tweet)
-   emit("weather", tweet)
+      if checksearch(tweet):
+             return
+      
+   emit('official', tweetls)
+   
+   emit("weather", tweetls[-1])
 
 @event('chirpregular')
 def tweet(ctx, e):
    # we receive a tweet
-   tweet = e.data
+   tweetls = e.data
 
    #I've been able to locate the user image urls, because I couldn't stand the 'image not found' icon on every tweet. -Douwe Osinga
    #class of tweet is dict, so try to change the value of the image keys to the default twitter user image.
-   tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-   tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'   
+   if not isinstance(tweetls, list):
+      tweetls = [tweetls]
 
-   if (len(cachedRegularTweets) > 5000):
-      cachedRegularTweets.pop()
-   cachedRegularTweets.insert(0, tweet)
+   for tweet in tweetls:
+      tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+      tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
+      if (len(cachedRegularTweets) > MAX_CACHE):
+         cachedRegularTweets.pop(0)
+      cachedRegularTweets.append(tweet)
 
-   global search
-   if search != "":
-      if not isintweet(tweet, search.split()):
+      if checksearch(tweet):
          return
-
-   emit('regular', tweet)
+      
+   emit('regular', tweetls)
 
 
 

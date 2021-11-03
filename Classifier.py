@@ -8,6 +8,8 @@ OfficialAccounts = ["wska_nl"]
 
 OfficialTweets = []
 RegularTweets = []
+def isofficial(tweet):
+    return tweet['user']['screen_name'] in OfficialAccounts
 
 def SeperateTweets(tweetlist):
     officiallist = []

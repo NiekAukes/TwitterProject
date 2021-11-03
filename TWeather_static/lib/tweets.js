@@ -81,52 +81,62 @@ block.fn.tweets = function(config) {
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
         
-        if (tweet === {}) {
+        if (jQuery.isEmptyObject(tweet)) {
+            
             while ($list.children().length > 0) {
                 $list.children().last().remove();
             }
             return;
         }
-        var $item = $('<li class="stream-item"></li>');
+        //if the argument is not a list, make it a list of len 1
+        if (tweet.constructor.name != "Array") {
+            tweet = [tweet];
+        }
+        console.debug(tweet);
+        var i = tweet.length > options.memory ? tweet.length - options.memory : 0
+        for (; i < tweet.length; i++) {
+            tweetiter = tweet[i];
+            var $item = $('<li class="stream-item"></li>');
 
-        var $tweet = $('<div class="tweet"></div>');
-        var $content = $('<div class="content"></div>');
-        var $header = $('<div class="stream-item-header"></div>');
+            var $tweet = $('<div class="tweet"></div>');
+            var $content = $('<div class="content"></div>');
+            var $header = $('<div class="stream-item-header"></div>');
 
-        // Build a tag image and header:
-        var $account = $('<a class="account-group"></a>');
-        $account.attr("href", "http://twitter.com/" + tweet.user.screen_name);
+            // Build a tag image and header:
+            var $account = $('<a class="account-group"></a>');
+            $account.attr("href", "http://twitter.com/" + tweetiter.user.screen_name);
 
-        var $avatar = $("<img>").addClass("avatar");
-        $avatar.attr("src", tweet.user.profile_image_url);
-        $account.append($avatar);
-        $account.append($('<strong class="fullname">' + tweet.user.name + '</strong>'));
-        $account.append($('<span>&nbsp;</span>'));
-        $account.append($('<span class="username"><s>@</s><b>' + tweet.user.screen_name + '</b></span>'));
-        $header.append($account);
+            var $avatar = $("<img>").addClass("avatar");
+            $avatar.attr("src", tweetiter.user.profile_image_url);
+            $account.append($avatar);
+            $account.append($('<strong class="fullname">' + tweetiter.user.name + '</strong>'));
+            $account.append($('<span>&nbsp;</span>'));
+            $account.append($('<span class="username"><s>@</s><b>' + tweetiter.user.screen_name + '</b></span>'));
+            $header.append($account);
 
-        // Build timestamp:
-        var $time = $('<small class="time"></small>');
-        $time.append($('<span>' + tweet.created_at + '</span>'));
+            // Build timestamp:
+            var $time = $('<small class="time"></small>');
+            $time.append($('<span>' + tweetiter.created_at + '</span>'));
 
-        $header.append($time);
-        $content.append($header);
+            $header.append($time);
+            $content.append($header);
 
-        // Build contents:
-        var text = process_entities(tweet.text, tweet.entities);
-        var $text = $('<p class="tweet-text">' + text + '</p>');
-        $content.append($text);
+            // Build contents:
+            var text = process_entities(tweetiter.text, tweetiter.entities);
+            var $text = $('<p class="tweet-text">' + text + '</p>');
+            $content.append($text);
 
-        // Build outer structure of containing divs:
-        $tweet.append($content);
-        $item.append($tweet);
-        
-        // place new tweet in front of list 
-        $list.prepend($item);
+            // Build outer structure of containing divs:
+            $tweet.append($content);
+            $item.append($tweet);
+            
+            // place new tweet in front of list 
+            $list.prepend($item);
 
-        // remove stale tweets
-        if ($list.children().size() > options.memory) {
-            $list.children().last().remove();
+            // remove stale tweets
+            if ($list.children().size() > options.memory) {
+                $list.children().last().remove();
+            }
         }
     });
 
