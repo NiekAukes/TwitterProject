@@ -1,0 +1,156 @@
+<!DOCTYPE html> 
+<html lang="en">
+      
+<head>
+    <title>TWeather</title>
+    <link rel="icon" href="/Assets/Tweather.ico">
+    <link rel="stylesheet" href="/style/styling.css"/>
+    <link rel="stylesheet" href="/style/layout.css"/>
+    <link rel="stylesheet" href="/style/twitter_feed_theme.css"/>
+    <link rel="stylesheet" href="/style/buttons.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/lib/jquery-2.1.1.min.js"></script>
+    <script src="/lib/jquery.flot.min.js"></script>
+    <script src="/lib/core.js"></script>
+    <script src="/lib/charts.js"></script>
+    <script src="/lib/log.js"></script> 
+    <script src="lib/form.js"></script>
+    <script src="/lib/tweets.js"></script> 
+    <script src="/lib/form.js"></script> 
+    <script src="/lib/weather.js"></script> 
+    <script>
+        window.post = function(url, data) {
+  return fetch(url, {method: "POST", body: JSON.stringify(data)});
+}
+
+    post("api/cache", {});
+    </script>
+</head>
+<body>
+    <div class="splash image fade-out">
+        <img src="/Assets/TwitterLogos/Tweather.png" alt="TWeather">
+    </div>
+    <div class="grid-container">
+        <section class="header" ondragstart="return false">
+            <!--ondragstart return false makes sure that the user cannot drag the element. In the CSS, user-select:none ensures that they cannot select it either-->
+            <img src="/Assets/TwitterLogos/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
+        </section>
+        <section class="search">
+            <div id="form">
+                <form class="tweet_search" ><!--action="/.../"-->
+                    <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
+                    <input id="searchTextArea" type="text" placeholder="Search for key word" name="search2" style="border-radius: 5px;">
+                </form>
+            </div>
+        </section>
+        <section class="alert" ondragstart="return false">
+            <div class="alertheader non-selectable bigheader">WEATHER ALERT</div>
+            <div class="alertWrapper">
+                <img id="alertIcon" class="alertIcon non-selectable" ondragstart="return false" src="Assets/Circles/svg/GreenCircle.svg">
+                <div id="alertText" class="alertText bigheader">Testtext</div>
+                
+            </div>
+        </section>
+        <section class="conditions non-selectable bigheader" ondragstart="return false">
+            WEATHER CONDITIONS
+            <div class="CurrentWeather" id="weather">
+                    <img src="Assets/WeatherCond/animated/cloudy-day-1.svg" class="WeatherConditionImage currWeatherItem" id="weatherimage">
+                    <div class="currTemp_weatherCondDescr currWeatherItem" id="currtemp">xx°C, Cloudy</div>
+                    <div class="location currWeatherItem" id="location">Enschede</div>
+                    <div class="currtime currWeatherItem" id="currtime">timeplaceholder</div>
+                
+                <div class="extraWeatherStats" id="extraWeatherStats" style="vertical-align: bottom;">
+                    <div class="humidity" id="humidity">Humidity: </div>
+                    <div class="wind_spd" id="wind_spd">Wind speed: </div>
+                    <div class="air_press" id="air_press">Air pressure: </div>
+                    <div class="rain" id="rain">Rain: </div>
+                </div>
+            </div>
+            <div class="currWeatherWeatherGraphContainer">
+                <div class="weatherGraphHeader bigheader non-selectable" ondragstart="return false">Weather graph</div>
+                <div id="graph" style="min-height:100px;height:100%;">
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="official non-selectable bigheader" ondragstart="return false">
+            OFFICIAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
+            <div class="scrollBox">
+                <div  id="officialTweets">
+                </div>
+            </div>
+        </section>
+        <section class="personal non-selectable bigheader" ondragstart="return false">
+            PERSONAL WEATHER TWEETS
+            <label class="switch">
+                <input type="checkbox" id="myCheckbox1" onchange="toggleCheck()" checked>
+                <span class="slider round"></span>
+            </label>
+            <div class="scrollBox">
+                <div id="userTweets" class="usertweets">
+                </div>
+            </div>
+        </section>
+        
+
+        <!--COPYRIGHT AND #WEER TWITTER LINK-->
+        <p class="waterMark" style="position:fixed; bottom:-5px;left:10px">&copy; TWeather&reg;</p>
+
+        <div class="visitWeer" style="position:fixed; right:20px; bottom:-10px; height:50px; vertical-align: bottom; display:flex; text-align: right; justify-content: right;">
+            Visit #weer: <a style="margin-left:10px;" href="https://twitter.com/hashtag/weer?src=hash" target="_blank"><img style="margin-bottom: 10px;" img height="30px" width="auto" src="Assets/TwitterLogos/Twitter link svg.svg"></a>
+        </div>
+        
+    </div>
+    <script>
+        block('#officialTweets').tweets({
+            memory:100
+        });
+        events.connect('official', '#officialTweets');
+    </script>
+    <script>
+        block('#userTweets').tweets({
+            memory:100
+        });
+        events.connect('regular', '#userTweets');
+    </script>
+    <script>
+        // create a rolling chart block
+       block('#graph').rolling_chart({
+           memory: 50,
+           
+           chart: {
+               yaxis:{
+                   min: -10,
+                   max: 40
+               },
+               xaxis: {
+                   show:false
+               }
+           }
+       });
+       events.connect('updateGraph', '#graph');
+    </script>
+    <script>
+        block('#form').form({
+            target: '/api/search',
+            callback: function() {
+            $('#location').val('');}  
+        });
+    </script>
+    <script>
+        block('#weather').weather({
+
+        })
+        events.connect('updateWeatherStats','#weather')
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
