@@ -123,6 +123,7 @@ def tweet(ctx, e):
 
       if not checksearch(tweet):
          return
+
    emit('official', tweetls)
    # generate output
 
