@@ -25,15 +25,15 @@ block.fn.weather = function(config) {
 
     // register default handler for updating the weather conditions
     this.actions(function(e, wCond){
-
+        console.log(wCond);
         //convert every dictionary value to a float that needs to be one, I don't want to end up getting javascripted (weird type errors, or none at all when there really should be.)
-        w_wind = parseFloat(wCond['Wind']);
-        w_uv = parseFloat(wCond['UV']); //basically how sunny it is
-        w_rain = parseFloat(wCond['Rain']);
-        w_temp = parseFloat(wCond['Temperature']);
-
+        w_wind = parseFloat(wCond.wind.replace(",", "."));
+        w_uv = parseFloat(wCond.UV.replace(",", ".")); //basically how sunny it is
+        w_rain = parseFloat(wCond.rain.replace(",", "."));
+        w_temp = parseFloat(wCond.temp.replace(",", "."));
+        console.log(w_wind)
         //EXAMPLE TIME: "Tue Oct 11 09:24:35 +0000 2011"
-        w_time_hour = wCond['Time'].split(':')[0]
+        w_time_hour = wCond.Date.split(" ")[3].split(':')[0]
         
         //set a boolean if it is day or not, to show day/night versions of the weather condition pictures
         isDay = w_time_hour >= 6 && w_time_hour <= 18 ? true : false;
@@ -74,14 +74,14 @@ block.fn.weather = function(config) {
         $img.src = imgurl;
         
         //set currtemperature, location and time appropriately
-        $currtemp.innerHTML = wCond['Temperature'] + "°C, " + condition;
-        $location.innerHTML = wCond['location'];
-        $currtime.innerHTML = wCond['Time'];
+        $currtemp.innerHTML = wCond.Temperature + "°C, " + condition;
+        $location.innerHTML = wCond.location;
+        $currtime.innerHTML = wCond.Date.split(" ")[3];
        
         //also set the humidity, wind speed and air pressure
-        $humidity.innerHTML = "Humidity: " + wCond['Humidity']+"%";
-        $wind_spd.innerHTML = "Wind speed: "+wCond['Wind'] + " m/s";
-        $air_press.innerHTML = "Air pressure: " +wCond['Air Pressure']+ " hPa";
+        $humidity.innerHTML = "Humidity: " + wCond.humidity+"%";
+        $wind_spd.innerHTML = "Wind speed: "+wCond.wind + " m/s";
+        $air_press.innerHTML = "Air pressure: " +wCond.hpa+ " hPa";
 
         //....and also check for any crazy weather alerts:
         //EXTREME WEATHER

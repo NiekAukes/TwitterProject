@@ -20,7 +20,7 @@ def ExtractWeatherFromTweet(Tweet):
     ret['temp'] = Tweet['text'][Temp + 4: Temp + 8].replace("º", "")
     ret['humidity'] = Tweet['text'][Humidity + 4:Humidity + 6]
     ret['wind'] = Tweet['text'][Wind + 5:Wind + 8]
-    ret['hpa'] = Tweet['text'][AirPressure - 8: AirPressure - 1]
+    ret['hpa'] = Tweet['text'][AirPressure - 8: AirPressure - 1].replace("\n", "")
     ret['hpastatus'] = ""
 
     #count until end of word

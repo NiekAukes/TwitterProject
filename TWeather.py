@@ -75,7 +75,7 @@ def rqCache(ctx, e):
 @event('init')
 def setup(ctx, e):
    #start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
-   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False,  "Mon Nov 28 15:55:54 +0000 2021"))
+   thread = Thread(target = supertweetgen, args = (Classifier.data, 1000, False, ))
    thread.start()
    #start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    
@@ -109,23 +109,25 @@ def tweet(ctx, e):
          cachedOfficialTweets.pop(0)
       cachedOfficialTweets.append(tweet)
 
+      weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
+
+      #update the graph
+      emit('updateGraph',{
+      'action': 'add',
+      'value': {
+          'series0':1,#weatherCond['Time'],
+          'series1':weatherCond['temp']}
+      })
+      print(weatherCond)
+      emit('updateWeatherStats',weatherCond)
+
       if not checksearch(tweet):
          return
    emit('official', tweetls)
    # generate output
-   emit('official', tweet)
 
    #retrieve weatherconditions from the tweets
-   weatherCond = (WeatherCondition.Extract(tweetls[-1]))
-
-   #update the graph
-   emit('updateGraph',{
-    'action': 'add',
-    'value': {
-       'series0':1,#weatherCond['Time'],
-       'series1':weatherCond['Temperature']}
-   })
-   emit('updateWeatherStats',weatherCond)
+   
 
 
 @event('chirpregular')
