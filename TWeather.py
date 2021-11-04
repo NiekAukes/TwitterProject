@@ -42,11 +42,12 @@ def rqSearch(ctx, e):
 def rqCache(ctx, e):
    print("cache requested")
    global searchval
+   global minimalscore
 
    #repush official tweets
    newlist = cachedOfficialTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedOfficialTweets if isintweet(tweet, searchval.split())]
+      newlist = [tweet for tweet in cachedOfficialTweets if getSearchPoints(tweet, searchval) > minimalscore]
       
    print("sent list: " + str(len(newlist)))
 
@@ -67,7 +68,7 @@ def rqCache(ctx, e):
    #repush regular tweets
    newlist = cachedRegularTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedRegularTweets if isintweet(tweet, searchval.split())]
+      newlist = [tweet for tweet in cachedRegularTweets if getSearchPoints(tweet, searchval) > minimalscore]
    print("sent list: " + str(len(newlist)))
    emit('regular', newlist)
 

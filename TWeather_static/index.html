@@ -123,20 +123,20 @@
     </script>
     <script>
         // create a rolling chart block
-       //block('#graph').rolling_chart({
-       //    memory: 50,
-       //    
-       //    chart: {
-       //        yaxis:{
-       //            min: -10,
-       //            max: 40
-       //        },
-       //        xaxis: {
-       //            show:false
-       //        }
-       //    }
-       //});
-       //events.connect('updateGraph', '#graph');
+       block('#graph').rolling_chart({
+           memory: 50,
+           
+           chart: {
+               yaxis:{
+                   min: -10,
+                   max: 40
+               },
+               xaxis: {
+                   show:false
+               }
+           }
+       });
+       events.connect('updateGraph', '#graph');
     </script>
     <script>
         block('#form').form({
