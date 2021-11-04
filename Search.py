@@ -27,7 +27,7 @@ def checksearch(tweet):
 
 if __name__ == "__main__":
     #print(Classifier.OfficialTweets[0])
-    Search(Classifier.OfficialTweets[0])
+    checksearch(Classifier.OfficialTweets[0])
     #SearchTweet(Classifier.OfficialTweets)
     
 
