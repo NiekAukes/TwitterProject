@@ -9,6 +9,7 @@ import Classifier
 import WeatherCondition
 from threading import Thread
 from Search import *
+from dateutil import parser
 
 MAX_CACHE = 500
 GraphMemory = 50
@@ -55,6 +56,8 @@ def rqCache(ctx, e):
    global GraphMemory
    #only push the last 50 tweets to the weathergraph
    for tweet in newlist[-GraphMemory:]  if len(newlist) > GraphMemory else newlist:
+      if tweet['user']['screen_name'] != "wska_nl":
+         continue
       weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
       global BaseTime
       #update the graph
@@ -79,33 +82,9 @@ classifier_threshold = 1
 
 
 
-def onReceiveSearch(json_file):
-   try:
-      if Classifier.tweetIsAboutWeather_Certainty(json_file) < classifier_threshold:
-            return
-   except:
-      print(json_file)
-      raise Exception()
-   id = json_file['id']
-   url = "https://api.twitter.com/2/tweets/{}?{}&{}&{}&{}".format(id, expansions, tweet_fields, user_fields, place_fields)
-
-
-   resp = requests.request("GET", url, auth=bearer_oauth)
-
-   if resp.status_code != 200:
-      raise Exception(
-         "Request returned an error: {} {}".format(
-            resp.status_code, resp.text
-            )
-        )
-   tweetdata = json.loads(resp.content)
-   tweetincl = tweetdata['includes']
-   tweetdata = tweetdata['data']
-   processTweet(tweetdata, tweetincl)
 
 @event('init')
 def setup(ctx, e):
-   pass
    #thread = Thread(target = supertweetgen, args = (Classifier.data, 10000,))
    #thread.start()
    
@@ -115,7 +94,7 @@ def setup(ctx, e):
 
    
    #i've craeted my own event generator, this allows us to have more control over the generation process
-   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False, "Mon Nov 20 15:55:54 +0000 2021"))
+   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False,))
    thread.start()
 
    
@@ -134,6 +113,8 @@ def tweet(ctx, e):
    #do the same thing with the weathergraph as in rqcache()
    global GraphMemory
    for tweet in tweetls[-GraphMemory:]  if len(tweetls) > GraphMemory else tweetls:
+      if tweet['user']['screen_name'] != "wska_nl":
+         continue
       weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
       global BaseTime
       #update the graph
@@ -145,8 +126,9 @@ def tweet(ctx, e):
 
    for tweet in tweetls:
       #replace user profile if it doesn't exist
-      tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-      tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
+      if parser.parse(tweet['created_at']).year < 2021 :
+         tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+         tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
       if (len(cachedOfficialTweets) > MAX_CACHE):
          cachedOfficialTweets.pop(0)
       cachedOfficialTweets.append(tweet)
@@ -176,8 +158,9 @@ def tweet(ctx, e):
       tweetls = [tweetls]
 
    for tweet in tweetls:
-      tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-      tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
+      if parser.parse(tweet['created_at']).year < 2021 :
+         tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+         tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
       if (len(cachedRegularTweets) > MAX_CACHE):
          cachedRegularTweets.pop(0)
       cachedRegularTweets.append(tweet)

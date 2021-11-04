@@ -55,7 +55,7 @@ def processTweet(data, includes):
             twet['entities']['urls'].append({"url":item['url'],"display_url":item['display_url'], "indices":[item['start'], item['end']]})
 
     
-    if not checksearch(twet):
+    if not checksearch(twet, TWeather.searchval):
         return
 
     if Classifier.isofficial(twet):
@@ -66,27 +66,29 @@ def processTweet(data, includes):
        
 
 def onReceiveTweet(json_file):
-   #if Classifier.tweetIsAboutWeather_Certainty(json_file) < classifier_threshold:
-   #   return
-   id = json_file['data']['id']
-   url = "https://api.twitter.com/2/tweets/{}?{}&{}&{}&{}".format(id, expansions, tweet_fields, user_fields, place_fields)
+    #if Classifier.tweetIsAboutWeather_Certainty(json_file) < classifier_threshold:
+    #   return
+    id = json_file['data']['id']
+    url = "https://api.twitter.com/2/tweets/{}?{}&{}&{}&{}".format(id, expansions, tweet_fields, user_fields, place_fields)
 
 
-   resp = requests.request("GET", url, auth=bearer_oauth)
+    resp = requests.request("GET", url, auth=bearer_oauth)
 
-   if resp.status_code != 200:
-      raise Exception(
-         "Request returned an error: {} {}".format(
-            resp.status_code, resp.text
-            )
-        )
-   try:
-      tweetdata = json.loads(resp.content)
-      tweetincl = tweetdata['includes']
-      tweetdata = tweetdata['data']
-      processTweet(tweetdata, tweetincl)
-   except:
-      print(resp.content)
+    if resp.status_code != 200:
+       raise Exception(
+          "Request returned an error: {} {}".format(
+             resp.status_code, resp.text
+             )
+         )
+    try:
+       tweetdata = json.loads(resp.content)
+       tweetincl = tweetdata['includes']
+       tweetdata = tweetdata['data']
+    except:
+        print("failed: ")
+        print(resp.content)
+    
+    processTweet(tweetdata, tweetincl)
 
 
 
