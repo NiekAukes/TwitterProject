@@ -52,7 +52,7 @@ def delete_all_rules(rules):
 def set_rules(delete):
     # You can adjust the rules if needed
     sample_rules = [
-        {"value": "weer", "tag": "weer tweather"},
+        {"value": "#weer", "tag": "weer tweather"},
     ]
     payload = {"add": sample_rules}
     response = requests.post(
@@ -87,61 +87,26 @@ tweet_fields = "tweet.fields=author_id,geo,id,created_at,entities,source"
 expansions = "expansions=author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id"
 user_fields = "user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"
 place_fields = "place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type"
-def cback(json_file):
-    id = "1455648455347642368"
-    url = "https://api.twitter.com/2/tweets/{}?{}&{}&{}&{}".format(id, expansions, tweet_fields, user_fields, place_fields)
 
-
-    resp = requests.request("GET", url, auth=bearer_oauth)
-
-    if resp.status_code != 200:
-        print(
-            "Request returned an error: {} {}".format(
-                resp.status_code, resp.text
-            )
-        )
-        return
-    try:
-        tweetdata = json.loads(resp.content)
-        tweetincl = tweetdata['includes']
-        tweetdata = tweetdata['data']
-        print(tweetdata['text'])
-        #parse data into accepted format
-        #data needed:
-        #   tweet.user.screen_name
-        #   tweet.user.name
-        #   tweet.user.profile_image_url
-        #   tweet.created_at
-        #   tweet.text
-        #   tweet.entities
-    
-    except:
-        return
-    from datetime import datetime
-    twet = {}
-    twet['user'] = {}
-    twet['user']['screen_name'] = tweetincl['users'][0]['username']
-    twet['user']['name'] = tweetincl['users'][0]['name']
-    twet['user']['profile_image_url'] = tweetincl['users'][0]['profile_image_url']
-    twet['created_at'] = datetime.strptime(tweetdata['created_at'], "%Y-%m-%dT%H:%M:%S.000Z").strftime('%a %b %d %H:%M:%S %z %Y')
-    twet['text'] = tweetdata['text']
-    twet['entities'] = {}
-    twet['entities']['hashtags'] = []
-    twet['entities']['user_mentions'] = []
-    twet['entities']['urls'] = []
-    for item in tweetdata['entities']['hashtags']:
-        twet['entities']['hashtags'].append({"text":item['tag'], "indices":[item['start'], item['end']]})
-    for item in tweetdata['entities']['mentions']:
-        twet['entities']['user_mentions'].append({"id_str":item["id"],"id":int(item["id"]),"screen_name":item['username'],"name":item['username'], "indices":[item['start'], item['end']]})
-    for item in tweetdata['entities']['urls']:
-        twet['entities']['urls'].append({"url":item['url'],"display_url":item['display_url'], "indices":[item['start'], item['end']]})
-cback(1)
 
 rules = get_rules()
 delete = delete_all_rules(rules)
 set = set_rules(delete)
 
+def SearchTweets(query, maxresults):
+    url = "https://api.twitter.com/2/tweets/search/recent?query=" + str(query)
+    
+    more = "&max_results=" + str(maxresults)
+    payload={}
+    headers = {}
 
+    response = requests.request("GET","{}&{}&{}&{}&{}".format(url, tweet_fields, expansions, user_fields, more), data=payload, auth=bearer_oauth)
+    json_obj = json.loads(response.text)
+    if json_obj['meta']['result_count'] < 1:
+        return []
+    return json_obj
 if __name__ == "__main__":
+    a = SearchTweets("weer", 10)
+    print(a)
     pass
     #get_stream(set, cback)

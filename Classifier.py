@@ -4,7 +4,7 @@
 
 # list of tweets ==> list of official + list of regular
 from Tweet import *
-OfficialAccounts = ["wska_nl"]
+OfficialAccounts = ["wska_nl", "FWolfheze"]
 OfficialTweets = []
 RegularTweets = []
 def isofficial(tweet):
@@ -15,7 +15,7 @@ def isofficial(tweet):
 ### EDIT THE THRESHOLD FOR STRICTER SELECTION OF PERSONAL TWEETS ABOUT WEATHER ###
 CERTAINTYTHRESHOLD = 1 #amount of keywords found in the message. If it exceeds this threshold, then it'll be displayed.
 keywordlist = ['zomer','herfst','winter','temperatuur','barometer','mist',
-                'bliksem','dauw','droog','gladheid','gevoelstemperatuur',
+                'bliksem','dauw','droog','gladheid','gevoelstemperatuur', 'warm',
                 'hagel','hemel','hPA','hittegolf','hitte','klimaat','golf','golven',
                 'nat','mist','neerslag','regen','motregen','motsneeuw','nevel',
                 'onweer','bui','sneeuw','storm','tropisch','tropen','weerbericht','wervelwind',
@@ -29,14 +29,20 @@ def tweetIsAboutWeather_Certainty(tweet):
     wordsstring = ' '.join(seperatewordlist)
 
     #extract the hashtags from the nested dictionary list (why twitter, why a nested dict list)
-    hastagdictlist = tweet['entities']['hashtags']
-    hastaglist = []
-    for dict in hastagdictlist:
-        hastaglist.append(dict['text'])
-    hashtags = [x.lower() for x in hastaglist]
+    if 'entities' in tweet:
+        if 'hashtags' in tweet['entities']:
+            hastagdictlist = tweet['entities']['hashtags']
+            hastaglist = []
 
-    #JOIN THE TWEET TEXT AND THE HASHTAGS
-    wordsstring += ''.join(hashtags)
+            for dict in hastagdictlist:
+                if 'text' in dict:
+                    hastaglist.append(dict['text'])
+                else:
+                    hastaglist.append(dict['tag'])
+            hashtags = [x.lower() for x in hastaglist]
+
+            #JOIN THE TWEET TEXT AND THE HASHTAGS
+            wordsstring += ''.join(hashtags)
 
     for keyword in keywordlist:
         for i in range(0, (len(wordsstring) - len(keyword))):
