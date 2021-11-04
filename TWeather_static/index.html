@@ -21,6 +21,7 @@
     <script src="/lib/tweets.js"></script> 
     <script src="/lib/form.js"></script> 
     <script src="/lib/weather.js"></script> 
+    <!--Small script for requesting cache if the page is reloaded-->
     <script>
         window.post = function(url, data) {
   return fetch(url, {method: "POST", body: JSON.stringify(data)});
@@ -30,6 +31,7 @@
     </script>
 </head>
 <body>
+    <!--Splash image for startup of the webpage-->
     <div class="splash image fade-out">
         <img src="/Assets/TwitterLogos/Tweather.png" alt="TWeather">
     </div>
@@ -38,6 +40,8 @@
             <!--ondragstart return false makes sure that the user cannot drag the element. In the CSS, user-select:none ensures that they cannot select it either-->
             <img src="/Assets/TwitterLogos/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
+        
+        <!--Search bar-->
         <section class="search">
             <div id="form">
                 <form class="tweet_search" ><!--action="/.../"-->
@@ -54,6 +58,8 @@
                 
             </div>
         </section>
+
+        <!--Weather conditions-->
         <section class="conditions non-selectable bigheader" ondragstart="return false">
             WEATHER CONDITIONS
             <div class="CurrentWeather" id="weather">
@@ -74,9 +80,9 @@
                 <div id="graph" style="min-height:100px;height:100%;">
                 </div>
             </div>
-            
         </section>
 
+        <!--Official weather tweets section-->
         <section class="official non-selectable bigheader" ondragstart="return false">
             OFFICIAL WEATHER TWEETS
             <label class="switch">
@@ -88,6 +94,8 @@
                 </div>
             </div>
         </section>
+
+        <!--Personal weather tweets section-->
         <section class="personal non-selectable bigheader" ondragstart="return false">
             PERSONAL WEATHER TWEETS
             <label class="switch">
@@ -109,6 +117,7 @@
         </div>
         
     </div>
+    <!--Link official tweets to the python code-->
     <script>
         block('#officialTweets').tweets({
             memory:100
