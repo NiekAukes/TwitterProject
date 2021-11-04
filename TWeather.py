@@ -9,31 +9,15 @@ from WeatherEventGen import *
 import Classifier
 import WeatherCondition
 from threading import Thread
-
+from Search import *
 MAX_CACHE = 500
 
-def isintweet(tweet, criteria):
-   #get the text, in a real algorithm, run this with account name too
-
-   text = tweet['text']
-   if any(x in text for x in criteria): #simple check i ripped from stackoverflow
-      return True
-   return False
-
 searchval = ""
-
-def checksearch(tweet):
-   global searchval #explicitly referencing the global variable search
-   if searchval != "": #check if there is anything searched
-      if isintweet(tweet, searchval.split()): #and run the function i just made
-         return True
-      else: return False
-   return True
-         
 
 cachedOfficialTweets = []
 cachedRegularTweets = []
 
+GraphMemory = 100
 
 
 #Adding a handler for the search button press.
@@ -57,40 +41,48 @@ def rqSearch(ctx, e):
 def rqCache(ctx, e):
    print("cache requested")
    global searchval
+   global minimalscore
 
    #repush official tweets
    newlist = cachedOfficialTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedOfficialTweets if isintweet(tweet, searchval.split())]
+      newlist = [tweet for tweet in cachedOfficialTweets if getSearchPoints(tweet, searchval) > minimalscore]
       
    print("sent list: " + str(len(newlist)))
+
+         
+   global GraphMemory
+   for tweet in newlist[-GraphMemory:]  if len(newlist) > GraphMemory else newlist:
+      weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
+      global BaseTime
+      #update the graph
+      emit('updateGraph',{
+      'action': 'add',
+      'value': float(weatherCond['temp'].replace(",","."))
+      })
+      emit('updateWeatherStats',weatherCond)
+      
    emit('official', newlist)
+
+
    #repush regular tweets
    newlist = cachedRegularTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedRegularTweets if isintweet(tweet, searchval.split())]
+      newlist = [tweet for tweet in cachedRegularTweets if getSearchPoints(tweet, searchval) > minimalscore]
    print("sent list: " + str(len(newlist)))
    emit('regular', newlist)
 
 @event('init')
 def setup(ctx, e):
    #start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
-   thread = Thread(target = supertweetgen, args = (Classifier.data, 1000, False, ))
+   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False, "Mon Nov 20 15:55:54 +0000 2011"))
    thread.start()
    #start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    
    
    #tweetonce(Classifier.OfficialTweets[0])
 
-def postTweet(tweet, channel):
-   global searchval
-   if searchval != "":
-      if not isintweet(tweet, searchval.split()):
-         return
-   
-   emit(channel, tweet)
-
-
+BaseTime = datetime.strptime("Mon oct 10 00:00:00 2011", '%a %b %d %H:%M:%S %Y')
 
 @event('chirpofficial')
 def tweet(ctx, e):
@@ -102,6 +94,17 @@ def tweet(ctx, e):
    if not isinstance(tweetls, list):
       tweetls = [tweetls]
 
+   global GraphMemory
+   for tweet in tweetls[-GraphMemory:]  if len(tweetls) > GraphMemory else tweetls:
+      weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
+      global BaseTime
+      #update the graph
+      emit('updateGraph',{
+      'action': 'add',
+      'value': float(weatherCond['temp'].replace(",","."))
+      })
+      emit('updateWeatherStats',weatherCond)
+
    for tweet in tweetls:
       tweet['user']['profile_image_url'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
       tweet['user']['profile_image_url_https'] = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'  
@@ -109,20 +112,12 @@ def tweet(ctx, e):
          cachedOfficialTweets.pop(0)
       cachedOfficialTweets.append(tweet)
 
-      weatherCond = WeatherCondition.ExtractWeatherFromTweet(tweet)
-
-      #update the graph
-      emit('updateGraph',{
-      'action': 'add',
-      'value': {
-          'series0':1,#weatherCond['Time'],
-          'series1':weatherCond['temp']}
-      })
-      print(weatherCond)
-      emit('updateWeatherStats',weatherCond)
-
-      if not checksearch(tweet):
+      global searchval
+      if not checksearch(tweet, searchval):
          return
+
+   
+      
    emit('official', tweetls)
    # generate output
 
@@ -146,8 +141,8 @@ def tweet(ctx, e):
       if (len(cachedRegularTweets) > MAX_CACHE):
          cachedRegularTweets.pop(0)
       cachedRegularTweets.append(tweet)
-
-      if not checksearch(tweet):
+      global searchval
+      if not checksearch(tweet, searchval):
          return
       
    emit('regular', tweetls)

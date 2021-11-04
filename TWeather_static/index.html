@@ -70,7 +70,7 @@
             </div>
             <div class="currWeatherWeatherGraphContainer">
                 <div class="weatherGraphHeader bigheader non-selectable" ondragstart="return false">Weather graph</div>
-                <div id="graph" style="min-height:100px;height:100%;">
+                <div id="graph" style="height: 80%; width: 80%;">
                 </div>
             </div>
             
@@ -113,21 +113,21 @@
         events.connect('regular', '#userTweets');
     </script>
     <script>
-        // create a rolling chart block
-       //block('#graph').rolling_chart({
-       //    memory: 50,
-       //    
-       //    chart: {
-       //        yaxis:{
-       //            min: -10,
-       //            max: 40
-       //        },
-       //        xaxis: {
-       //            show:false
-       //        }
-       //    }
-       //});
-       //events.connect('updateGraph', '#graph');
+        //create a rolling chart block
+       block('#graph').rolling_chart({
+           memory: 50,
+           
+           chart: {
+               yaxis:{
+                   min: 0,
+                   max: 40
+               },
+               xaxis: {
+                   show:false
+               }
+           }
+       });
+       events.connect('updateGraph', '#graph');
     </script>
     <script>
         block('#form').form({
