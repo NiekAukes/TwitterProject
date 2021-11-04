@@ -33,18 +33,18 @@
 
 <body>
     <div class="splash image fade-out">
-        <img src="/Assets/Tweather.png" alt="TWeather">
+        <img src="/Assets/TwitterLogos/Tweather.png" alt="TWeather">
     </div>
     <div class="grid-container">
         <section class="header" ondragstart="return false">
             <!--ondragstart return false makes sure that the user cannot drag the element. In the CSS, user-select:none ensures that they cannot select it either-->
-            <img src="/Assets/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
+            <img src="/Assets/TwitterLogos/TWEATHERLOGO_Twitterlogo.png" alt="TWeather" width="35%" height="auto">
         </section>
         <section class="search">
             <div id="form">
                 <form class="tweet_search" ><!--action="/.../"-->
                     <button type="submit" style="border-radius: 5px;"><i class="fa fa-search"></i></button>
-                    <input id="searchTextArea" type="text" placeholder="Search for location..." name="search2" style="border-radius: 5px;">
+                    <input id="searchTextArea" type="text" placeholder="Search for key word" name="search2" style="border-radius: 5px;">
                 </form>
             </div>
         </section>
@@ -68,6 +68,7 @@
                     <div class="humidity" id="humidity">Humidity: </div>
                     <div class="wind_spd" id="wind_spd">Wind speed: </div>
                     <div class="air_press" id="air_press">Air pressure: </div>
+                    <div class="rain" id="rain">Rain: </div>
                 </div>
             </div>
             <div class="currWeatherWeatherGraphContainer">
@@ -101,6 +102,14 @@
             </div>
         </section>
         
+
+        <!--COPYRIGHT AND #WEER TWITTER LINK-->
+        <p class="waterMark" style="position:fixed; bottom:-5px;left:10px">&copy; TWeather&reg;</p>
+
+        <div class="visitWeer" style="position:fixed; right:20px; bottom:-10px; height:50px; vertical-align: bottom; display:flex; text-align: right; justify-content: right;">
+            Visit #weer: <a style="margin-left:10px;" href="https://twitter.com/hashtag/weer?src=hash" target="_blank"><img style="margin-bottom: 10px;" img height="30px" width="auto" src="Assets/TwitterLogos/Twitter link svg.svg"></a>
+        </div>
+        
     </div>
     <script>
         block('#officialTweets').tweets({
@@ -116,20 +125,20 @@
     </script>
     <script>
         // create a rolling chart block
-       //block('#graph').rolling_chart({
-       //    memory: 50,
-       //    
-       //    chart: {
-       //        yaxis:{
-       //            min: -10,
-       //            max: 40
-       //        },
-       //        xaxis: {
-       //            show:false
-       //        }
-       //    }
-       //});
-       //events.connect('updateGraph', '#graph');
+       block('#graph').rolling_chart({
+           memory: 50,
+           
+           chart: {
+               yaxis:{
+                   min: -10,
+                   max: 40
+               },
+               xaxis: {
+                   show:false
+               }
+           }
+       });
+       events.connect('updateGraph', '#graph');
     </script>
     <script>
         block('#form').form({
