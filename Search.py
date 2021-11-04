@@ -1,9 +1,8 @@
 from WeatherCondition import *
 import Tweet
 import Classifier
-from dateutil import parser
-import math
 
+Classifier.OfficialTweets
 
 def getSearchPoints(tweet, criteria):
     if criteria == "":

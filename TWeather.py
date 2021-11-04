@@ -10,14 +10,14 @@ import Classifier
 import WeatherCondition
 from threading import Thread
 from Search import *
-MAX_CACHE = 500
 
+MAX_CACHE = 500
+GraphMemory = 50
 searchval = ""
 
 cachedOfficialTweets = []
 cachedRegularTweets = []
 
-GraphMemory = 50
 
 
 #Adding a handler for the search button press.
@@ -42,12 +42,11 @@ def rqSearch(ctx, e):
 def rqCache(ctx, e):
    print("cache requested")
    global searchval
-   global minimalscore
 
    #repush official tweets
    newlist = cachedOfficialTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedOfficialTweets if getSearchPoints(tweet, searchval) > minimalscore]
+      newlist = [tweet for tweet in cachedOfficialTweets if isintweet(tweet, searchval.split())]
       
    print("sent list: " + str(len(newlist)))
 
@@ -65,12 +64,10 @@ def rqCache(ctx, e):
       emit('updateWeatherStats',weatherCond)
       
    emit('official', newlist)
-
-
    #repush regular tweets
    newlist = cachedRegularTweets
    if searchval != "":
-      newlist = [tweet for tweet in cachedRegularTweets if getSearchPoints(tweet, searchval) > minimalscore]
+      newlist = [tweet for tweet in cachedRegularTweets if isintweet(tweet, searchval.split())]
    print("sent list: " + str(len(newlist)))
    emit('regular', newlist)
 

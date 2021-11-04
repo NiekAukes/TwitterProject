@@ -80,6 +80,7 @@ block.fn.tweets = function(config) {
 
     // register default handler for handling tweet data
     this.actions(function(e, tweet){
+        console.debug(tweet);
         if (jQuery.isEmptyObject(tweet)) {
             
             while ($list.children().length > 0) {
