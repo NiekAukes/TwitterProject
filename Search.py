@@ -4,24 +4,24 @@ import Classifier
 
 Classifier.OfficialTweets
 
-def SearchTweet(x):
-    newret = dict()
-    search = input("Search key words: ")
-    for (key, value) in x.items():
-        if key == search:
-            newret[key] = value
-    print('Filtered Dictionary : ')
-    print(newret)
+def isintweet(tweet, criteria):
+   #get the text, in a real algorithm, run this with account name too
 
-def Search(Tweet):
-    newlist = []
-    Tweet1 = 'has_{} 1' .format(Tweet)
-    end = Tweet1.find("n_r")
-    print(end)
-    for i in range(3):
-        print(Tweet[i])
-    newlist.append(Tweet[14:140])
-    print(newlist)
+   text = tweet['text']
+   if any(x in text for x in criteria): #simple check i ripped from stackoverflow
+      return True
+   return False
+
+search = ""
+
+def checksearch(tweet):
+   global search #explicitly referencing the global variable search
+   if search != "": #check if there is anything searched
+      if isintweet(tweet, search.split()): #and run the function i just made
+         return True
+      else: return False
+   return True
+
 
 
 
