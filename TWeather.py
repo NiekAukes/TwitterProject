@@ -116,8 +116,6 @@ def tweet(ctx, e):
       if not checksearch(tweet, searchval):
          return
 
-   
-      
    emit('official', tweetls)
    # generate output
 
