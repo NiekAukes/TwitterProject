@@ -17,7 +17,7 @@ searchval = ""
 cachedOfficialTweets = []
 cachedRegularTweets = []
 
-GraphMemory = 100
+GraphMemory = 50
 
 
 #Adding a handler for the search button press.
