@@ -10,7 +10,7 @@ import TWeather
 import Classifier
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
-def supertweetgen(data, timescale=1000, loop=True, begintime="Mon Oct 31 15:55:54 +0000 2011", classifier_threshold = 2):
+def supertweetgen(data, timescale=1000, loop=True, begintime="Mon Nov 28 15:55:54 +0000 2011", classifier_threshold = 2):
     
     officialcatchuptweets = []
     regularcatchuptweets = []
@@ -52,7 +52,7 @@ def supertweetgen(data, timescale=1000, loop=True, begintime="Mon Oct 31 15:55:5
         fire_global("chirpregular", regularcatchuptweets)
         regularcatchuptweets = []
     if (loop):
-        supertweetgen(data, timescale=1000, loop=True, begintime="Mon Oct 31 15:55:54 +0000 2011", classifier_threshold = 2)
+        supertweetgen(data, timescale=1000, loop=True, begintime=begintime, classifier_threshold = 2)
         #repeat it
 
 

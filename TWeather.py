@@ -75,7 +75,7 @@ def rqCache(ctx, e):
 @event('init')
 def setup(ctx, e):
    #start_tweets(Classifier.OfficialTweets, time_factor=10000, event_name='chirpofficial')
-   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000,))
+   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False,  "Mon Nov 28 15:55:54 +0000 2021"))
    thread.start()
    #start_tweets(Classifier.RegularTweets, time_factor=10000, event_name='chirpregular')
    
