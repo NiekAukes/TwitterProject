@@ -21,13 +21,11 @@ block.fn.weather = function(config) {
 
     // register default handler for updating the weather conditions and weather alerts
     this.actions(function(e, wCond){
-        console.log(wCond);
         //convert every dictionary value to a float that needs to be one, I don't want to end up getting javascripted (weird type errors, or none at all when there really should be.)
         w_wind = parseFloat(wCond.wind.replace(",", "."));
         w_uv = parseFloat(wCond.UV.replace(",", ".")); //basically how sunny it is
         w_rain = parseFloat(wCond.rain.replace(",", "."));
         w_temp = parseFloat(wCond.temp.replace(",", "."));
-        console.log(w_wind)
         //EXAMPLE TIME: "Tue Oct 11 09:24:35 +0000 2011"
         w_time_hour = wCond.Date.split(" ")[3].split(':')[0]
         
@@ -70,7 +68,7 @@ block.fn.weather = function(config) {
         $img.src = imgurl;
         
         //set currtemperature, location and time appropriately
-        $currtemp.innerHTML = wCond.Temperature + "°C, " + condition;
+        $currtemp.innerHTML = wCond.temp + "°C, " + condition;
         $location.innerHTML = wCond.location;
         $currtime.innerHTML = wCond.Date.split(" ")[3];
        
