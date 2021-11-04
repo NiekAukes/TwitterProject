@@ -11,10 +11,7 @@ data = []
 with open(os.path.abspath('Data\\weer.json'), 'r') as json_file:
     data = [json.loads(line) for line in json_file]
 
-def sorter(obj1):
-    return datetime.datetime.strptime(obj1['created_at'], '%a %b %d %H:%M:%S %z %Y')
 
-data.sort(key=sorter)
 
 #simple test
 if __name__ == "__main__":
