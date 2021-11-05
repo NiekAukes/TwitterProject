@@ -27,23 +27,27 @@ def tweetIsAboutWeather_Certainty(tweet):
     #generate the word string from the tweet text
     seperatewordlist = [x.lower() for x in (tweet['text'].split())]
     wordsstring = ' '.join(seperatewordlist)
-
+    
+    if('tweather' in tweet['text']): 
+        return 100
     #extract the hashtags from the nested dictionary list (why twitter, why a nested dict list)
-    if 'entities' in tweet:
-        if 'hashtags' in tweet['entities']:
-            hastagdictlist = tweet['entities']['hashtags']
-            hastaglist = []
+    #if 'entities' in tweet:
+    #    if 'hashtags' in tweet['entities']:
+    #        hastagdictlist = tweet['entities']['hashtags']
+    #        hastaglist = []
+#
+    #        for dict in hastagdictlist:
+    #            if 'text' in dict:
+    #                hastaglist.append(dict['text'])
+    #            else:
+    #                hastaglist.append(dict['tag'])
+    #        hashtags = [x.lower() for x in hastaglist]
+#
+    #        #JOIN THE TWEET TEXT AND THE HASHTAGS
+    #        wordsstring += ''.join(hashtags)
 
-            for dict in hastagdictlist:
-                if 'text' in dict:
-                    hastaglist.append(dict['text'])
-                else:
-                    hastaglist.append(dict['tag'])
-            hashtags = [x.lower() for x in hastaglist]
-
-            #JOIN THE TWEET TEXT AND THE HASHTAGS
-            wordsstring += ''.join(hashtags)
-
+    #for the presentation, if people tweet either #weer or #tweather or something with tweather they automatically appear
+    
     for keyword in keywordlist:
         for i in range(0, (len(wordsstring) - len(keyword))):
             #check if the keywords match for every possible string made up from the hashtags and the text

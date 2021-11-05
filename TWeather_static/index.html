@@ -3,7 +3,7 @@
       
 <head>
     <title>TWeather</title>
-    <link rel="icon" href="/Assets/Tweather.ico">
+    <link rel="icon" href="/Assets/TwitterLogos/Tweather.ico">
     <link rel="stylesheet" href="/style/styling.css"/>
     <link rel="stylesheet" href="/style/layout.css"/>
     <link rel="stylesheet" href="/style/twitter_feed_theme.css"/>
@@ -21,14 +21,7 @@
     <script src="/lib/tweets.js"></script> 
     <script src="/lib/form.js"></script> 
     <script src="/lib/weather.js"></script> 
-    <script>
-        window.post = function(url, data) {
-  return fetch(url, {method: "POST", body: JSON.stringify(data)});
-}
-
-    post("api/cache", {});
-    console.log("reqcaache");
-    </script>
+    
 </head>
 
 <body>
@@ -152,6 +145,14 @@
 
         })
         events.connect('updateWeatherStats','#weather')
+    </script>
+    <script>
+        window.post = function(url, data) {
+  return fetch(url, {method: "POST", body: JSON.stringify(data)});
+}
+
+    post("api/cache", {});
+    console.log("reqcaache");
     </script>
     <script src="app.js"></script>
 </body>

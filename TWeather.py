@@ -94,7 +94,7 @@ def setup(ctx, e):
 
    
    #i've craeted my own event generator, this allows us to have more control over the generation process
-   thread = Thread(target = supertweetgen, args = (Classifier.data, 10000, False,))
+   thread = Thread(target = supertweetgen, args = (Tweet.data, 5000, False, "Dec 25 15:55:54 2011", ))
    thread.start()
 
    

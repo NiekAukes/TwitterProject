@@ -12,6 +12,8 @@ from Classifier import *
 from Search import *
 from eca import fire, get_context, context_switch, register_auxiliary, auxiliary
 
+CERTAINTYTHRESHOLD = 2
+
 def processTweet(data, includes):
     try:
       tweetdata = data
@@ -61,13 +63,13 @@ def processTweet(data, includes):
     if Classifier.isofficial(twet):
         fire_global('chirpofficial', twet)
     else:
-        #if Classifier.tweetIsAboutWeather_Certainty(twet) > Classifier.classifier_threshold:
-        fire_global("chirpregular", twet)
+        if Classifier.tweetIsAboutWeather_Certainty(twet) > CERTAINTYTHRESHOLD:
+            fire_global("chirpregular", twet)
        
-
 def onReceiveTweet(json_file):
-    #if Classifier.tweetIsAboutWeather_Certainty(json_file) < classifier_threshold:
-    #   return
+    #print(json_file)
+    if Classifier.tweetIsAboutWeather_Certainty(json_file['data']) < CERTAINTYTHRESHOLD:
+       return
     id = json_file['data']['id']
     url = "https://api.twitter.com/2/tweets/{}?{}&{}&{}&{}".format(id, expansions, tweet_fields, user_fields, place_fields)
 
@@ -94,17 +96,18 @@ def onReceiveTweet(json_file):
 
 
 
-def supertweetgen(datacpy, timescale=1000, loop=True, begintime="Mon Nov 28 15:55:54 +0000 2011", classifier_threshold = 2):
+def supertweetgen(datacpy, timescale=1000, loop=True, begintime="Nov 28 15:55:54 2011", classifier_threshold = 2):
     #our own event generator, 
     # if tweets are before begintime, all of them will be sent at once
     #we've also made changes to javascript lib functions to create more functionality
     data = datacpy[:]
     officialcatchuptweets = []
     regularcatchuptweets = []
-    last_time = datetime.strptime(begintime, '%a %b %d %H:%M:%S %z %Y')
+    last_time = datetime.strptime(begintime, '%b %d %H:%M:%S %Y')
     for tweet in data:
-        tweet_time = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
-        tweet['created_at'] = datetime.strftime(tweet_time, '%a %b %d %H:%M:%S %Y') #fix the date so timezone isn't shown
+        tweet['created_at'] = tweet['created_at'].replace("+0000 ", "") #fix the date so timezone isn't shown
+        tweet_time = parser.parse(tweet['created_at'])
+       
         if (tweet_time < last_time):
             #immediately print
             if Classifier.isofficial(tweet):

@@ -3,7 +3,6 @@ import Tweet
 import Classifier
 import math
 from dateutil import parser
-
 Classifier.OfficialTweets
 
 def getSearchPoints(tweet, criteria):
@@ -26,14 +25,8 @@ def getSearchPoints(tweet, criteria):
         try:
             #try to parse time
             pars = parser.parse(sp)
-            if pars.day == date.day: 
-                score += 1 * score_mod / len(splt)
-            if pars.month == date.month: 
-                score += 1 * score_mod / len(splt)
-            if pars.year == date.year: 
-                score += 1 * score_mod / len(splt)
-            if pars.day == date.day and pars.month == date.month:
-                score += 3 * score_mod / len(splt)
+            if pars.day == date.day and pars.month == date.month and pars.year == date.year:
+                score += 10 * score_mod 
         except:
             pass
 
@@ -49,13 +42,7 @@ def getSearchPoints(tweet, criteria):
     date = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %Y')
     try:
         pars = parser.parse(criteria)
-        if pars.day == date.day:  
-            score += 3 * score_mod
-        if pars.month == date.month:
-            score += 3 * score_mod
-        if pars.year == date.year:
-            score += 3 * score_mod
-        if pars.day == date.day and pars.month == date.month:
+        if pars.day == date.day and pars.month == date.month and pars.year == date.year:
             score += 10 * score_mod
     except:
         pass

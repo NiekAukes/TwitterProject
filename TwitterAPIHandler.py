@@ -48,11 +48,22 @@ def delete_all_rules(rules):
         )
     print(json.dumps(response.json()))
 
-
+keywordlist = ['zomer','herfst','winter','temperatuur','mist',
+                'bliksem','dauw','droog','glad', 'warm',
+                'hagel','hittegolf','hitte',
+                'nat','mist','neerslag','regen','nevel',
+                'onweer','bui','sneeuw','storm','tropisch',
+                'wolken','bries', 'zon'] #not weer because it is already filtered on that.
 def set_rules(delete):
     # You can adjust the rules if needed
+    query = "#weer OR #tweather"
+    for match in keywordlist:
+        query += " OR " + match
+    
+    #query = urllib.parse.quote(query)
+
     sample_rules = [
-        {"value": "#weer", "tag": "weer tweather"},
+        {"value": "("+query+") lang:nl"},
     ]
     payload = {"add": sample_rules}
     response = requests.post(
