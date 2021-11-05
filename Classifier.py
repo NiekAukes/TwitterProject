@@ -4,7 +4,11 @@
 
 # list of tweets ==> list of official + list of regular
 from Tweet import *
-OfficialAccounts = ["wska_nl", "FWolfheze", "MeteoParkstad", "jandestripman"]
+OfficialAccounts = ["het_zee", "WVloerzegem", "BeWilrijk", "WeerInVeendam", "MMusselkanaal"
+    "whisper1990", "RonvanDongen", "Weervinkt", "VeenWow", "JelleDijkhuizen",
+    "Leudalweer", "WRozenburg", "Meteo_RLD", "ParkstadMeteo", "meteodelfzijl",
+    "hetweerdenhaat", "hetweerincapel1"
+    "wska_nl", "FWolfheze", "MeteoParkstad", "jandestripman"]
 OfficialTweets = []
 RegularTweets = []
 def isofficial(tweet):
