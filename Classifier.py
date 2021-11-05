@@ -7,8 +7,8 @@ from Tweet import *
 OfficialAccounts = ["het_zee", "WVloerzegem", "BeWilrijk", "WeerInVeendam", "MMusselkanaal"
     "whisper1990", "RonvanDongen", "Weervinkt", "VeenWow", "JelleDijkhuizen",
     "Leudalweer", "WRozenburg", "Meteo_RLD", "ParkstadMeteo", "meteodelfzijl",
-    "hetweerdenhaat", "hetweerincapel1"
-    "wska_nl", "FWolfheze", "MeteoParkstad", "jandestripman"]
+    "hetweerdenhaat", "hetweerincapel1",
+    "wska_nl", "FWolfheze", "MeteoParkstad"]
 OfficialTweets = []
 RegularTweets = []
 def isofficial(tweet):
